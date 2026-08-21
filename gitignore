@@ -1,4 +1,10 @@
-.venv/
+# PyCharm
+.idea/
+
+# Python
 pycache/
 *.pyc
-.idea/
+
+# Virtual environment
+.venv/
+venv/
