@@ -1,6 +1,6 @@
 # PyCharm
 .idea/
-
+.idea
 # Python
 pycache/
 *.pyc

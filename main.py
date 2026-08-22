@@ -39,6 +39,8 @@ class Game(arcade.Window):
         # Create a SpriteList for Storing bullets
         self.bullet_list = arcade.SpriteList()
 
+        # Create a Score system
+        self.score=0
 
         # Store the player's movement speed.
         self.speed = 200
@@ -65,6 +67,9 @@ class Game(arcade.Window):
         self.player_list.draw()
         self.enemy_list.draw()
         self.bullet_list.draw()
+
+        # Show score
+        arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 20)
 
     def on_update(self, delta_time):
         # `on_update` is used to update the game state.
@@ -109,6 +114,7 @@ class Game(arcade.Window):
             # If the bullet collides with the enemy,
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             for enemy in hit_list:
+                self.score += 10 # Add score for kill enemy
                 enemy.remove_from_sprite_lists()
             if hit_list:
                 bullet.remove_from_sprite_lists()
