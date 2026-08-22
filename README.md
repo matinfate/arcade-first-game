@@ -25,13 +25,17 @@ and the Arcade game development library.
 - [x] Enemy Sprites
 - [x] Collision Detection
 - [x] Bullet System
+- [x] Bullet-Enemy Collision
+- [x] Removing Bullets and Enemies
+- [x] Score System
+- [x] Multiple Enemies
+- [x] Random Enemy Spawning
 
 ## 🚧 Currently Working On
 
-- Removing bullets after collision
-- Improving enemy system
-- Adding score
-- Adding player health
+- Enemy Respawning
+- Adding Player Health
+- Improving the Enemy System
 
 ## 🎯 Goal
 
