@@ -30,7 +30,7 @@ class Game(arcade.Window):
         # Create a Sprite using the enemy image with for.
         for i in range(5):
             enemy = arcade.Sprite("enemy.png")
-            enemy.scale = 0.05
+            enemy.scale = 0.2
             enemy.center_x = 100 + i * 100
             enemy.center_y = 400 + i * 10
 
@@ -110,6 +110,8 @@ class Game(arcade.Window):
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             for enemy in hit_list:
                 enemy.remove_from_sprite_lists()
+            if hit_list:
+                bullet.remove_from_sprite_lists()
 
 
     # Keyboard key press event.
@@ -133,7 +135,7 @@ class Game(arcade.Window):
 
         # If Space pressed,create a bullet
         if key == arcade.key.SPACE:
-            bullet=arcade.Sprite("bullet.jfif")
+            bullet=arcade.Sprite("bullet.png")
             bullet.scale = 0.2
             bullet.center_x = self.player.center_x
             bullet.bottom=self.player.top
