@@ -1,5 +1,5 @@
 import arcade
-
+import random
 
 # Create a class named `Game` that inherits from `arcade.Window`.
 class Game(arcade.Window):
@@ -27,14 +27,9 @@ class Game(arcade.Window):
         # Add the enemy Sprite to the SpriteList.
         self.enemy_list = arcade.SpriteList()
 
-        # Create a Sprite using the enemy image with for.
+        # Creating an enemy to start the game
         for i in range(5):
-            enemy = arcade.Sprite("enemy.png")
-            enemy.scale = 0.2
-            enemy.center_x = 100 + i * 100
-            enemy.center_y = 400 + i * 10
-
-            self.enemy_list.append(enemy)
+            self.create_enemy()
 
         # Create a SpriteList for Storing bullets
         self.bullet_list = arcade.SpriteList()
@@ -167,6 +162,13 @@ class Game(arcade.Window):
         if key == arcade.key.D:
             self.right_pressed = False
 
+    # Generate enemy automote
+    def create_enemy(self):
+        enemy=arcade.Sprite("enemy.png")
+        enemy.scale=0.2
+        enemy.center_x = random.randint(50,750)
+        enemy.center_y = random.randint(400,550)
+        self.enemy_list.append(enemy)
 
 # Create an object (instance) of the Game class.
 game = Game()
