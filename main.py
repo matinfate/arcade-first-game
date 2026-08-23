@@ -37,6 +37,9 @@ class Game(arcade.Window):
         # Create a Score system
         self.score=0
 
+        # Create a Health for player
+        self.health = 100
+
         # Store the player's movement speed.
         self.speed = 200
 
@@ -66,6 +69,9 @@ class Game(arcade.Window):
         # Show score
         arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 20)
 
+        # Show health
+        arcade.draw_text(f"Health: {self.health}",10, 40, arcade.color.RED,  20
+                         )
     def on_update(self, delta_time):
         # `on_update` is used to update the game state.
         #
@@ -113,6 +119,13 @@ class Game(arcade.Window):
 
             elif enemy.center_y > self.player.center_y:
                 enemy.center_y -= 50 * delta_time
+
+            # If the enemy collides with the player,
+            if arcade.check_for_collision(enemy,self.player):
+                self.health -= 1
+                enemy.remove_from_sprite_lists()
+                self.create_enemy()
+
 
         # Move bullet
         for bullet in self.bullet_list:
