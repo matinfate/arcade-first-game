@@ -30,12 +30,16 @@ and the Arcade game development library.
 - [x] Score System
 - [x] Multiple Enemies
 - [x] Random Enemy Spawning
+- [x] Enemy Respawning
+- [x] Enemy Movement
+- [x] Player Health
+- [x] Game Over System
 
 ## 🚧 Currently Working On
 
-- Enemy Respawning
-- Adding Player Health
-- Improving the Enemy System
+- Restarting the game after Game Over
+- Improving the enemy system
+- Adding new gameplay features
 
 ## 🎯 Goal
 
