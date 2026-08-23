@@ -108,11 +108,12 @@ class Game(arcade.Window):
             bullet.center_y+=bullet.change_y*delta_time
             # If the bullet collides with the enemy,
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
-            for enemy in hit_list:
-                self.score += 10 # Add score for kill enemy
-                enemy.remove_from_sprite_lists()
             if hit_list:
-                bullet.remove_from_sprite_lists()
+                for enemy in hit_list:
+                    self.score += 10 # Add score for kill enemy
+                    enemy.remove_from_sprite_lists()
+                    bullet.remove_from_sprite_lists()
+                    self.create_enemy()
 
 
     # Keyboard key press event.
