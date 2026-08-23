@@ -40,6 +40,9 @@ class Game(arcade.Window):
         # Create a Health for player
         self.health = 100
 
+        # Create a game over variable
+        self.game_over = False
+
         # Store the player's movement speed.
         self.speed = 200
 
@@ -70,13 +73,21 @@ class Game(arcade.Window):
         arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 20)
 
         # Show health
-        arcade.draw_text(f"Health: {self.health}",10, 40, arcade.color.RED,  20
-                         )
+        arcade.draw_text(f"Health: {self.health}",10, 40, arcade.color.RED,  20)
+
+        # Show game over
+        if self.game_over:
+            arcade.draw_text("GAME OVER",270,300,arcade.color.RED_PURPLE,40)
+
     def on_update(self, delta_time):
         # `on_update` is used to update the game state.
         #
         # `delta_time` = the amount of time that has passed
         # since the previous call to on_update().
+
+        # If the game is Game Over, the player, enemies, and bullets no longer move.
+        if self.game_over:
+            return
 
         # Reset movement values at the beginning of each update.
         self.change_x = 0
@@ -122,9 +133,11 @@ class Game(arcade.Window):
 
             # If the enemy collides with the player,
             if arcade.check_for_collision(enemy,self.player):
-                self.health -= 1
+                self.health -= 20
                 enemy.remove_from_sprite_lists()
                 self.create_enemy()
+                if self.health == 0:
+                    self.game_over = True
 
 
         # Move bullet
@@ -138,7 +151,6 @@ class Game(arcade.Window):
                     enemy.remove_from_sprite_lists()
                     bullet.remove_from_sprite_lists()
                     self.create_enemy()
-
 
     # Keyboard key press event.
     def on_key_press(self, key, modifiers):
