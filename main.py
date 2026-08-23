@@ -99,9 +99,20 @@ class Game(arcade.Window):
         self.player.center_x += self.change_x * delta_time
         self.player.center_y += self.change_y * delta_time
 
-        # Move enemy
+        # Move enemy toward player
         for enemy in self.enemy_list:
-            enemy.center_x += 10 * delta_time
+
+            if enemy.center_x < self.player.center_x:
+                enemy.center_x += 50 * delta_time
+
+            elif enemy.center_x > self.player.center_x:
+                enemy.center_x -= 50 * delta_time
+
+            if enemy.center_y < self.player.center_y:
+                enemy.center_y += 50 * delta_time
+
+            elif enemy.center_y > self.player.center_y:
+                enemy.center_y -= 50 * delta_time
 
         # Move bullet
         for bullet in self.bullet_list:
