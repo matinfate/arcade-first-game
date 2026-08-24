@@ -34,6 +34,14 @@ class Game(arcade.Window):
         # Create a SpriteList for Storing bullets
         self.bullet_list = arcade.SpriteList()
 
+        # Create a Damage for player
+        self.damage=20
+
+        # Create invincible system
+        self.invincible=False
+        self.invincibility_time=1.0
+        self.invincibility_timer=0
+
         # Create a Score system
         self.score=0
 
@@ -89,6 +97,11 @@ class Game(arcade.Window):
         if self.game_over:
             return
 
+        if self.invincibility_timer>0:
+            self.invincibility_timer -= delta_time
+            if self.invincibility_timer<=0:
+                self.invincible=False
+
         # Reset movement values at the beginning of each update.
         self.change_x = 0
         self.change_y = 0
@@ -133,9 +146,13 @@ class Game(arcade.Window):
 
             # If the enemy collides with the player,
             if arcade.check_for_collision(enemy,self.player):
-                self.health -= 20
-                enemy.remove_from_sprite_lists()
-                self.create_enemy()
+                if not self.invincible:
+                    self.health -= self.damage
+                    self.invincible=True
+                    self.invincibility_timer=self.invincibility_time
+                    enemy.remove_from_sprite_lists()
+                    self.create_enemy()
+
                 if self.health == 0:
                     self.game_over = True
 
