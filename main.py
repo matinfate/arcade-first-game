@@ -180,6 +180,10 @@ class Game(arcade.Window):
             bullet.change_y = 500
             self.bullet_list.append(bullet)
 
+        # If R pressed. Restart game
+        if key == arcade.key.R:
+            self.restart_game()
+
     # Keyboard key release event.
     def on_key_release(self, key, modifiers):
 
@@ -206,6 +210,21 @@ class Game(arcade.Window):
         enemy.center_x = random.randint(50,750)
         enemy.center_y = random.randint(400,550)
         self.enemy_list.append(enemy)
+
+    # Restart game
+    def restart_game(self):
+        self.player.center_x=400
+        self.player.center_y=300
+
+        self.health = 100
+        self.score = 0
+        self.game_over = False
+
+        self.bullet_list.clear()
+        self.enemy_list.clear()
+
+        for i in range(5):
+            self.create_enemy()
 
 # Create an object (instance) of the Game class.
 game = Game()
