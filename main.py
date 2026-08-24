@@ -97,8 +97,13 @@ class Game(arcade.Window):
         if self.game_over:
             return
 
+        # Damage cooldown
         if self.invincibility_timer>0:
             self.invincibility_timer -= delta_time
+
+            # Blink player
+            self.player.visible = int(self.invincibility_timer * 10) % 2 == 0
+
             if self.invincibility_timer<=0:
                 self.invincible=False
 
@@ -235,6 +240,8 @@ class Game(arcade.Window):
 
         self.health = 100
         self.score = 0
+        self.invincibility_timer=0
+        self.invincible=False
         self.game_over = False
 
         self.bullet_list.clear()
