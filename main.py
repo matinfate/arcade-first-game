@@ -136,7 +136,6 @@ class Game(arcade.Window):
             self.change_x = -self.speed
 
         # Update the player's position.
-        #
         # Instead of changing self.x and self.y,
         # we now change the Sprite's position.
         self.player.center_x += self.change_x * delta_time
@@ -173,7 +172,12 @@ class Game(arcade.Window):
         # Move bullet
         for bullet in self.bullet_list:
             bullet.center_y+=bullet.change_y*delta_time
-            # If the bullet collides with the enemy,
+
+            # Remove bullets that leave the screen
+            if bullet.bottom > self.height:
+                bullet.remove_from_sprite_lists()
+
+            # Check bullet collision with enemies
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             if hit_list:
                 for enemy in hit_list:
@@ -181,6 +185,8 @@ class Game(arcade.Window):
                     enemy.remove_from_sprite_lists()
                     bullet.remove_from_sprite_lists()
                     self.create_enemy()
+
+
 
     # Keyboard key press event.
     def on_key_press(self, key, modifiers):
