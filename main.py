@@ -42,6 +42,10 @@ class Game(arcade.Window):
         self.invincibility_time=1.0
         self.invincibility_timer=0
 
+        # Create cooldown system for bullet
+        self.shoot_cooldown=0.25
+        self.shoot_timer=0
+
         # Create a Score system
         self.score=0
 
@@ -106,6 +110,10 @@ class Game(arcade.Window):
 
             if self.invincibility_timer<=0:
                 self.invincible=False
+
+        # Shoot cooldown
+        if self.shoot_timer>0:
+            self.shoot_timer -= delta_time
 
         # Reset movement values at the beginning of each update.
         self.change_x = 0
@@ -194,13 +202,14 @@ class Game(arcade.Window):
             self.right_pressed = True
 
         # If Space pressed,create a bullet
-        if key == arcade.key.SPACE:
+        if key == arcade.key.SPACE and self.shoot_timer<=0:
             bullet=arcade.Sprite("bullet.png")
             bullet.scale = 0.2
             bullet.center_x = self.player.center_x
             bullet.bottom=self.player.top
             bullet.change_y = 500
             self.bullet_list.append(bullet)
+            self.shoot_timer = self.shoot_cooldown
 
         # If R pressed. Restart game
         if key == arcade.key.R:
