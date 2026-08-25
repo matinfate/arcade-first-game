@@ -1,7 +1,6 @@
 # PyCharm / IntelliJ
 .idea/
-.idea
-
+__pycache__/
 # Virtual environments
 .venv/
 
