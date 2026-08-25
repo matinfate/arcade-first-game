@@ -1,6 +1,7 @@
 import arcade
 import random
 
+from player import Player
 # Create a class named `Game` that inherits from `arcade.Window`.
 class Game(arcade.Window):
 
@@ -8,15 +9,8 @@ class Game(arcade.Window):
         # Initialize the parent class (`arcade.Window`).
         super().__init__(800, 600, "My First Game")
 
-        # Create a Sprite using the player image.
-        self.player = arcade.Sprite("assets/image/player.png")
-
-        # Change the size of the Sprite.
-        self.player.scale = 0.2
-
-        # Set the initial position of the player.
-        self.player.center_x = 400
-        self.player.center_y = 300
+        # Create a player from class Player.
+        self.player = Player()
 
         # Create a SpriteList to store our sprites.
         self.player_list = arcade.SpriteList() # SpriteList is a specialized Arcade list for storing sprites.
@@ -34,8 +28,6 @@ class Game(arcade.Window):
         # Create a SpriteList for Storing bullets
         self.bullet_list = arcade.SpriteList()
 
-        # Create a Damage for player
-        self.damage=20
 
         # Create invincible system
         self.invincible=False
@@ -49,25 +41,9 @@ class Game(arcade.Window):
         # Create a Score system
         self.score=0
 
-        # Create a Health for player
-        self.health = 100
 
         # Create a game over variable
         self.game_over = False
-
-        # Store the player's movement speed.
-        self.speed = 200
-
-        # Store the current movement value on the X and Y axes.
-        self.change_x = 0
-        self.change_y = 0
-
-        # Store the current state of each movement key.
-        # False means that the key is not currently being held.
-        self.up_pressed = False
-        self.down_pressed = False
-        self.left_pressed = False
-        self.right_pressed = False
 
     def on_draw(self):
         # `on_draw` is a method specific to Arcade.
@@ -85,7 +61,7 @@ class Game(arcade.Window):
         arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 20)
 
         # Show health
-        arcade.draw_text(f"Health: {self.health}",10, 40, arcade.color.RED,  20)
+        arcade.draw_text(f"Health: {self.player.health}",10, 40, arcade.color.RED,  20)
 
         # Show game over
         if self.game_over:
@@ -110,36 +86,37 @@ class Game(arcade.Window):
 
             if self.invincibility_timer<=0:
                 self.invincible=False
+                self.player.visible = True
 
         # Shoot cooldown
         if self.shoot_timer>0:
             self.shoot_timer -= delta_time
 
         # Reset movement values at the beginning of each update.
-        self.change_x = 0
-        self.change_y = 0
+        self.player.change_x = 0
+        self.player.change_y = 0
 
         # If W is being held, move upward.
-        if self.up_pressed:
-            self.change_y = self.speed
+        if self.player.up_pressed:
+            self.player.change_y = self.player.speed
 
         # If S is being held, move downward.
-        if self.down_pressed:
-            self.change_y = -self.speed
+        if self.player.down_pressed:
+            self.player.change_y = -self.player.speed
 
         # If D is being held, move right.
-        if self.right_pressed:
-            self.change_x = self.speed
+        if self.player.right_pressed:
+            self.player.change_x = self.player.speed
 
         # If A is being held, move left.
-        if self.left_pressed:
-            self.change_x = -self.speed
+        if self.player.left_pressed:
+            self.player.change_x = -self.player.speed
 
         # Update the player's position.
         # Instead of changing self.x and self.y,
         # we now change the Sprite's position.
-        self.player.center_x += self.change_x * delta_time
-        self.player.center_y += self.change_y * delta_time
+        self.player.center_x += self.player.change_x * delta_time
+        self.player.center_y += self.player.change_y * delta_time
 
         # Move enemy toward player
         for enemy in self.enemy_list:
@@ -159,13 +136,13 @@ class Game(arcade.Window):
             # If the enemy collides with the player,
             if arcade.check_for_collision(enemy,self.player):
                 if not self.invincible:
-                    self.health -= self.damage
+                    self.player.health -= self.player.damage
                     self.invincible=True
                     self.invincibility_timer=self.invincibility_time
                     enemy.remove_from_sprite_lists()
                     self.create_enemy()
 
-                if self.health == 0:
+                if self.player.health == 0:
                     self.game_over = True
 
 
@@ -193,19 +170,19 @@ class Game(arcade.Window):
 
         # If W is pressed, set up_pressed to True.
         if key == arcade.key.W:
-            self.up_pressed = True
+            self.player.up_pressed = True
 
         # If S is pressed, set down_pressed to True.
         if key == arcade.key.S:
-            self.down_pressed = True
+            self.player.down_pressed = True
 
         # If A is pressed, set left_pressed to True.
         if key == arcade.key.A:
-            self.left_pressed = True
+            self.player.left_pressed = True
 
         # If D is pressed, set right_pressed to True.
         if key == arcade.key.D:
-            self.right_pressed = True
+            self.player.right_pressed = True
 
         # If Space pressed,create a bullet
         if key == arcade.key.SPACE and self.shoot_timer<=0:
@@ -218,7 +195,7 @@ class Game(arcade.Window):
             self.shoot_timer = self.shoot_cooldown
 
         # If R pressed. Restart game
-        if key == arcade.key.R:
+        if key == arcade.key.R and self.game_over:
             self.restart_game()
 
     # Keyboard key release event.
@@ -226,19 +203,19 @@ class Game(arcade.Window):
 
         # If W is released, set up_pressed to False.
         if key == arcade.key.W:
-            self.up_pressed = False
+            self.player.up_pressed = False
 
         # If S is released, set down_pressed to False.
         if key == arcade.key.S:
-            self.down_pressed = False
+            self.player.down_pressed = False
 
         # If A is released, set left_pressed to False.
         if key == arcade.key.A:
-            self.left_pressed = False
+            self.player.left_pressed = False
 
         # If D is released, set right_pressed to False.
         if key == arcade.key.D:
-            self.right_pressed = False
+            self.player.right_pressed = False
 
     # Generate enemy automote
     def create_enemy(self):
@@ -253,7 +230,7 @@ class Game(arcade.Window):
         self.player.center_x=400
         self.player.center_y=300
 
-        self.health = 100
+        self.player.health = 100
         self.score = 0
         self.invincibility_timer=0
         self.invincible=False
