@@ -2,6 +2,7 @@ import arcade
 
 from player import Player
 from enemy import Enemy
+from bullet import Bullet
 
 # Create a class named `Game` that inherits from `arcade.Window`.
 class Game(arcade.Window):
@@ -149,7 +150,7 @@ class Game(arcade.Window):
 
         # Move bullet
         for bullet in self.bullet_list:
-            bullet.center_y+=bullet.change_y*delta_time
+            bullet.center_y += bullet.speed * delta_time
 
             # Remove bullets that leave the screen
             if bullet.bottom > self.height:
@@ -184,12 +185,9 @@ class Game(arcade.Window):
             self.player.right_pressed = True
 
         # If Space pressed,create a bullet
-        if key == arcade.key.SPACE and self.shoot_timer<=0:
-            bullet=arcade.Sprite("assets/image/bullet.png")
-            bullet.scale = 0.2
-            bullet.center_x = self.player.center_x
-            bullet.bottom=self.player.top
-            bullet.change_y = 500
+        if key == arcade.key.SPACE and self.shoot_timer <= 0:
+            bullet = Bullet(self.player.center_x,self.player.top)
+
             self.bullet_list.append(bullet)
             self.shoot_timer = self.shoot_cooldown
 
