@@ -1,0 +1,26 @@
+# Window settings
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+SCREEN_TITLE = "My First Game"
+
+# Player settings
+PLAYER_SPEED = 200
+PLAYER_HEALTH = 100
+PLAYER_DAMAGE = 20
+
+# Enemy settings
+ENEMY_SPEED = 50
+STARTING_ENEMY_COUNT = 5
+
+# Bullet settings
+BULLET_SPEED = 500
+BULLET_SCALE = 0.2
+
+# Shooting settings
+SHOOT_COOLDOWN = 0.25
+
+# Damage settings
+INVINCIBILITY_TIME = 1.0
+
+# Score settings
+ENEMY_SCORE = 10

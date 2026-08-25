@@ -4,12 +4,22 @@ from player import Player
 from enemy import Enemy
 from bullet import Bullet
 
+from settings import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    SCREEN_TITLE,
+    SHOOT_COOLDOWN,
+    INVINCIBILITY_TIME,
+    STARTING_ENEMY_COUNT,
+    ENEMY_SCORE
+)
+
 # Create a class named `Game` that inherits from `arcade.Window`.
 class Game(arcade.Window):
 
     def __init__(self):
         # Initialize the parent class (`arcade.Window`).
-        super().__init__(800, 600, "My First Game")
+        super().__init__(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_TITLE)
 
         # Create a player from class Player.
         self.player = Player()
@@ -24,7 +34,7 @@ class Game(arcade.Window):
         self.enemy_list = arcade.SpriteList()
 
         # Creating an enemy to start the game
-        for i in range(5):
+        for i in range(STARTING_ENEMY_COUNT):
             self.create_enemy()
 
         # Create a SpriteList for Storing bullets
@@ -33,11 +43,11 @@ class Game(arcade.Window):
 
         # Create invincible system
         self.invincible=False
-        self.invincibility_time=1.0
+        self.invincibility_time=INVINCIBILITY_TIME
         self.invincibility_timer=0
 
         # Create cooldown system for bullet
-        self.shoot_cooldown=0.25
+        self.shoot_cooldown=SHOOT_COOLDOWN
         self.shoot_timer=0
 
         # Create a Score system
@@ -160,7 +170,7 @@ class Game(arcade.Window):
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             if hit_list:
                 for enemy in hit_list:
-                    self.score += 10 # Add score for kill enemy
+                    self.score += ENEMY_SCORE # Add score for kill enemy
                     enemy.remove_from_sprite_lists()
                     bullet.remove_from_sprite_lists()
                     self.create_enemy()
@@ -231,5 +241,5 @@ class Game(arcade.Window):
         self.bullet_list.clear()
         self.enemy_list.clear()
 
-        for i in range(5):
+        for i in range(STARTING_ENEMY_COUNT):
             self.create_enemy()

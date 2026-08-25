@@ -1,5 +1,10 @@
 import arcade
 
+from settings import (
+    PLAYER_SPEED,
+    PLAYER_HEALTH,
+    PLAYER_DAMAGE
+)
 
 class Player(arcade.Sprite):
 
@@ -16,7 +21,7 @@ class Player(arcade.Sprite):
         self.center_y = 300
 
         # Store the player's movement speed.
-        self.speed = 200
+        self.speed = PLAYER_SPEED
 
         # Store the current movement value on the X and Y axes.
         self.change_x = 0
@@ -29,7 +34,7 @@ class Player(arcade.Sprite):
         self.right_pressed = False
 
         # Create a Health for player
-        self.health = 100
+        self.health = PLAYER_HEALTH
 
         # Create a Damage for player
-        self.damage = 20
+        self.damage = PLAYER_DAMAGE
