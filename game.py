@@ -1,7 +1,8 @@
 import arcade
-import random
 
 from player import Player
+from enemy import Enemy
+
 # Create a class named `Game` that inherits from `arcade.Window`.
 class Game(arcade.Window):
 
@@ -122,16 +123,16 @@ class Game(arcade.Window):
         for enemy in self.enemy_list:
 
             if enemy.center_x < self.player.center_x:
-                enemy.center_x += 50 * delta_time
+                enemy.center_x += enemy.speed * delta_time
 
             elif enemy.center_x > self.player.center_x:
-                enemy.center_x -= 50 * delta_time
+                enemy.center_x -= enemy.speed * delta_time
 
             if enemy.center_y < self.player.center_y:
-                enemy.center_y += 50 * delta_time
+                enemy.center_y += enemy.speed * delta_time
 
             elif enemy.center_y > self.player.center_y:
-                enemy.center_y -= 50 * delta_time
+                enemy.center_y -= enemy.speed * delta_time
 
             # If the enemy collides with the player,
             if arcade.check_for_collision(enemy,self.player):
@@ -142,7 +143,7 @@ class Game(arcade.Window):
                     enemy.remove_from_sprite_lists()
                     self.create_enemy()
 
-                if self.player.health == 0:
+                if self.player.health <= 0:
                     self.game_over = True
 
 
@@ -162,8 +163,6 @@ class Game(arcade.Window):
                     enemy.remove_from_sprite_lists()
                     bullet.remove_from_sprite_lists()
                     self.create_enemy()
-
-
 
     # Keyboard key press event.
     def on_key_press(self, key, modifiers):
@@ -219,22 +218,17 @@ class Game(arcade.Window):
 
     # Generate enemy automote
     def create_enemy(self):
-        enemy=arcade.Sprite("assets/image/enemy.png")
-        enemy.scale=0.2
-        enemy.center_x = random.randint(50,750)
-        enemy.center_y = random.randint(400,550)
+        enemy = Enemy()
         self.enemy_list.append(enemy)
 
     # Restart game
     def restart_game(self):
-        self.player.center_x=400
-        self.player.center_y=300
-
         self.player.health = 100
         self.score = 0
-        self.invincibility_timer=0
-        self.invincible=False
+        self.invincibility_timer = 0
+        self.invincible = False
         self.game_over = False
+        self.player.visible = True
 
         self.bullet_list.clear()
         self.enemy_list.clear()
