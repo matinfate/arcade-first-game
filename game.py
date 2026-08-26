@@ -33,8 +33,12 @@ class Game(arcade.Window):
         # Add the enemy Sprite to the SpriteList.
         self.enemy_list = arcade.SpriteList()
 
+        # Add enemy wave
+        self.wave = 1
+        self.enemy_count = 5
+
         # Creating an enemy to start the game
-        for i in range(STARTING_ENEMY_COUNT):
+        for i in range(self.enemy_count):
             self.create_enemy()
 
         # Create a SpriteList for Storing bullets
@@ -74,6 +78,9 @@ class Game(arcade.Window):
 
         # Show health
         arcade.draw_text(f"Health: {self.player.health}",10, 40, arcade.color.RED,  20)
+
+        # Show enemy wave
+        arcade.draw_text(f"Wave:{self.wave}",10, 70, arcade.color.YELLOW, 20)
 
         # Show game over
         if self.game_over:
@@ -176,7 +183,9 @@ class Game(arcade.Window):
                     self.score += ENEMY_SCORE # Add score for kill enemy
                     enemy.remove_from_sprite_lists()
                     bullet.remove_from_sprite_lists()
-                    self.create_enemy()
+
+        if len(self.enemy_list)==0:
+            self.next_wave()
 
     # Keyboard key press event.
     def on_key_press(self, key, modifiers):
@@ -232,6 +241,15 @@ class Game(arcade.Window):
         enemy = Enemy()
         self.enemy_list.append(enemy)
 
+    # Generate next wave
+    def next_wave(self):
+        self.wave += 1
+
+        self.enemy_count += 2
+
+        for i in range(self.enemy_count):
+            self.create_enemy()
+
     # Restart game
     def restart_game(self):
         self.player.health = 100
@@ -244,5 +262,5 @@ class Game(arcade.Window):
         self.bullet_list.clear()
         self.enemy_list.clear()
 
-        for i in range(STARTING_ENEMY_COUNT):
+        for i in range(self.enemy_count):
             self.create_enemy()
