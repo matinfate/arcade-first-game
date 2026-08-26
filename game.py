@@ -10,7 +10,7 @@ from settings import (
     SCREEN_TITLE,
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
-    STARTING_ENEMY_COUNT,
+    PLAYER_HEALTH,
     ENEMY_SCORE
 )
 
@@ -74,13 +74,37 @@ class Game(arcade.Window):
         self.bullet_list.draw()
 
         # Show score
-        arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 20)
+        arcade.draw_text(f"Score: {self.score}", 10, 570, arcade.color.WHITE, 20)
 
-        # Show health
-        arcade.draw_text(f"Health: {self.player.health}",10, 40, arcade.color.RED,  20)
+        # Show health bar
+        max_health=PLAYER_HEALTH
+        health_width=200
+        health_height=20
+        health_ratio=self.player.health/max_health
+        current_health_width = health_width * health_ratio
+
+        arcade.draw_rect_filled( # This defines Fill and color this rectangle.
+            arcade.rect.XYWH( # This defines a rectangle.
+                10,
+                40,
+                health_width,
+                health_height),
+            arcade.color.DARK_RED
+        )  # Background
+
+        arcade.draw_rect_filled(
+            arcade.rect.XYWH(
+                10,
+                40,
+                current_health_width,
+                health_height
+            ),
+            arcade.color.GREEN
+        )  # Current health
+
 
         # Show enemy wave
-        arcade.draw_text(f"Wave:{self.wave}",10, 70, arcade.color.YELLOW, 20)
+        arcade.draw_text(f"Wave:{self.wave}",10, 530, arcade.color.DARK_RED, 20)
 
         # Show game over
         if self.game_over:
@@ -158,7 +182,7 @@ class Game(arcade.Window):
             # If the enemy collides with the player,
             if arcade.check_for_collision(enemy,self.player):
                 if not self.invincible:
-                    self.player.health -= self.player.damage
+                    self.player.health = max(0,self.player.health - self.player.damage)
                     self.invincible=True
                     self.invincibility_timer=self.invincibility_time
                     enemy.remove_from_sprite_lists()
@@ -252,7 +276,7 @@ class Game(arcade.Window):
 
     # Restart game
     def restart_game(self):
-        self.player.health = 100
+        self.player.health = PLAYER_HEALTH
         self.score = 0
         self.invincibility_timer = 0
         self.invincible = False
