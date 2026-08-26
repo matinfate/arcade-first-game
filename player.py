@@ -3,7 +3,9 @@ import arcade
 from settings import (
     PLAYER_SPEED,
     PLAYER_HEALTH,
-    PLAYER_DAMAGE
+    PLAYER_DAMAGE,
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT
 )
 
 class Player(arcade.Sprite):
@@ -38,3 +40,17 @@ class Player(arcade.Sprite):
 
         # Create a Damage for player
         self.damage = PLAYER_DAMAGE
+
+    # keep player inside screen
+    def keep_inside_screen(self):
+        if self.left < 0:
+            self.left = 0
+
+        if self.right > SCREEN_WIDTH:
+            self.right = SCREEN_WIDTH
+
+        if self.bottom < 0:
+            self.bottom = 0
+
+        if self.top > SCREEN_HEIGHT:
+            self.top = SCREEN_HEIGHT

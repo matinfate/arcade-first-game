@@ -130,6 +130,9 @@ class Game(arcade.Window):
         self.player.center_x += self.player.change_x * delta_time
         self.player.center_y += self.player.change_y * delta_time
 
+        # keep player inside screen
+        self.player.keep_inside_screen()
+
         # Move enemy toward player
         for enemy in self.enemy_list:
 
