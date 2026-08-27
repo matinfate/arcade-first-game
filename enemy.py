@@ -1,6 +1,6 @@
 import arcade
 import random
-from settings import ENEMY_SPEED
+from settings import ENEMY_SPEED,ENEMY_HEALTH
 
 class Enemy(arcade.Sprite):
 
@@ -9,6 +9,9 @@ class Enemy(arcade.Sprite):
 
         self.scale = 0.2
         self.speed = ENEMY_SPEED
+
+        self.max_health = ENEMY_HEALTH
+        self.health = self.max_health
 
         self.center_x = random.randint(50, 750)
         self.center_y = random.randint(400, 550)

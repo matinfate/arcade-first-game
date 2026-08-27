@@ -11,7 +11,8 @@ from settings import (
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
     PLAYER_HEALTH,
-    ENEMY_SCORE
+    ENEMY_SCORE,
+    BULLET_DAMAGE
 )
 
 # Create a class named `Game` that inherits from `arcade.Window`.
@@ -36,6 +37,8 @@ class Game(arcade.Window):
         # Add enemy wave
         self.wave = 1
         self.enemy_count = 5
+
+
 
         # Creating an enemy to start the game
         for i in range(self.enemy_count):
@@ -204,9 +207,13 @@ class Game(arcade.Window):
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             if hit_list:
                 for enemy in hit_list:
-                    self.score += ENEMY_SCORE # Add score for kill enemy
-                    enemy.remove_from_sprite_lists()
+                    enemy.health-=BULLET_DAMAGE
                     bullet.remove_from_sprite_lists()
+
+                    if enemy.health<=0:
+                        self.score += ENEMY_SCORE  # Add score for kill enemy
+                        enemy.remove_from_sprite_lists()
+
 
         if len(self.enemy_list)==0:
             self.next_wave()
@@ -282,6 +289,8 @@ class Game(arcade.Window):
         self.invincible = False
         self.game_over = False
         self.player.visible = True
+        self.wave = 1
+        self.enemy_count = 5
 
         self.bullet_list.clear()
         self.enemy_list.clear()
