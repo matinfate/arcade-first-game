@@ -79,7 +79,11 @@ class Game(arcade.Window):
         # Show score
         arcade.draw_text(f"Score: {self.score}", 10, 570, arcade.color.WHITE, 20)
 
-        # Show health bar
+        # Show enemy health bar
+        for enemy in self.enemy_list:
+            enemy.draw_health_bar()
+
+        # Show player health bar
         max_health=PLAYER_HEALTH
         health_width=200
         health_height=20
