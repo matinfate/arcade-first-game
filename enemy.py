@@ -4,8 +4,8 @@ from settings import ENEMY_SPEED,ENEMY_HEALTH
 
 class Enemy(arcade.Sprite):
 
-    def __init__(self):
-        super().__init__("assets/image/enemy.png")
+    def __init__(self, image="assets/image/enemy.png"):
+        super().__init__(image)
 
         self.scale = 0.2
         self.speed = ENEMY_SPEED
@@ -17,30 +17,48 @@ class Enemy(arcade.Sprite):
         self.center_y = random.randint(400, 550)
 
     def draw_health_bar(self):
-        health_width=40
-        health_height=10
+        health_width = 40
+        health_height = 5
 
-        health_ratio=self.health/self.max_health
+        health_ratio = self.health / self.max_health
 
-        current_health_width = health_width * health_ratio
+        current_width = health_width * health_ratio
 
-        # Background
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
                 self.center_x,
-                self.center_y+35,
+                self.center_y + 30,
                 health_width,
-                health_height),
+                health_height
+            ),
             arcade.color.DARK_RED
         )
 
-        # Current health
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
-                self.center_x,
-                self.center_y+35,
-                current_health_width,
-                health_height
-            ),
+                self.center_x - (health_width - current_width) / 2,
+                self.center_y + 30,
+                current_width,
+                health_height),
             arcade.color.GREEN
         )
+
+class FastEnemy(Enemy):
+
+    def __init__(self):
+        super().__init__("assets/image/fast_enemy.png")
+
+        self.scale = 0.1
+        self.speed=100
+        self.max_health=20
+        self.health=self.max_health
+
+class TankEnemy(Enemy):
+
+    def __init__(self):
+        super().__init__("assets/image/tank_enemy.png")
+
+        self.scale = 0.5
+        self.speed = 30
+        self.max_health = 80
+        self.health = self.max_health

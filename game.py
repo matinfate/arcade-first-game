@@ -1,7 +1,8 @@
 import arcade
+import random
 
 from player import Player
-from enemy import Enemy
+from enemy import Enemy, FastEnemy, TankEnemy
 from bullet import Bullet
 
 from settings import (
@@ -95,7 +96,8 @@ class Game(arcade.Window):
                 10,
                 40,
                 health_width,
-                health_height),
+                health_height
+            ),
             arcade.color.DARK_RED
         )  # Background
 
@@ -273,7 +275,18 @@ class Game(arcade.Window):
 
     # Generate enemy automote
     def create_enemy(self):
-        enemy = Enemy()
+
+        enemy_type = random.randint(1, 100)
+
+        if enemy_type <= 70:
+            enemy = Enemy()
+
+        elif enemy_type <= 85:
+            enemy = FastEnemy()
+
+        else:
+            enemy = TankEnemy()
+
         self.enemy_list.append(enemy)
 
     # Generate next wave
