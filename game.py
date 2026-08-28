@@ -1,9 +1,11 @@
 import arcade
 import random
 
+import explosion
 from player import Player
 from enemy import Enemy, FastEnemy, TankEnemy
 from bullet import Bullet
+from explosion import Explosion
 
 from settings import (
     SCREEN_WIDTH,
@@ -48,6 +50,8 @@ class Game(arcade.Window):
         # Create a SpriteList for Storing bullets
         self.bullet_list = arcade.SpriteList()
 
+        # Create a list for Soring explosion
+        self.explosion_list = []
 
         # Create invincible system
         self.invincible=False
@@ -83,6 +87,10 @@ class Game(arcade.Window):
         # Show enemy health bar
         for enemy in self.enemy_list:
             enemy.draw_health_bar()
+
+        # Show explosion
+        for explosion in self.explosion_list:
+            explosion.draw()
 
         # Show player health bar
         max_health=PLAYER_HEALTH
@@ -218,7 +226,14 @@ class Game(arcade.Window):
 
                     if enemy.health<=0:
                         self.score += ENEMY_SCORE  # Add score for kill enemy
+                        explosion=Explosion(enemy.center_x,enemy.center_y)
+                        self.explosion_list.append(explosion)
                         enemy.remove_from_sprite_lists()
+
+        # Update explosions
+        for explosion in self.explosion_list:
+            if explosion.update(delta_time):
+                self.explosion_list.remove(explosion)
 
 
         if len(self.enemy_list)==0:
