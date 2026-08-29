@@ -1,11 +1,14 @@
 import arcade
 import random
 
+from pyglet.experimental import particles
+
 import explosion
 from player import Player
 from enemy import Enemy, FastEnemy, TankEnemy
 from bullet import Bullet
 from explosion import Explosion
+from particle import Particle
 
 from settings import (
     SCREEN_WIDTH,
@@ -15,7 +18,8 @@ from settings import (
     INVINCIBILITY_TIME,
     PLAYER_HEALTH,
     ENEMY_SCORE,
-    BULLET_DAMAGE
+    BULLET_DAMAGE,
+    PARTICLE_COUNT
 )
 
 # Create a class named `Game` that inherits from `arcade.Window`.
@@ -50,8 +54,11 @@ class Game(arcade.Window):
         # Create a SpriteList for Storing bullets
         self.bullet_list = arcade.SpriteList()
 
-        # Create a list for Soring explosion
+        # Create a list for Storing explosion
         self.explosion_list = []
+
+        # Create a list for Storing particles
+        self.particles = []
 
         # Create invincible system
         self.invincible=False
@@ -91,6 +98,10 @@ class Game(arcade.Window):
         # Show explosion
         for explosion in self.explosion_list:
             explosion.draw()
+
+        # Show partile
+        for particle in self.particles:
+            particle.draw()
 
         # Show player health bar
         max_health=PLAYER_HEALTH
@@ -226,7 +237,16 @@ class Game(arcade.Window):
 
                     if enemy.health<=0:
                         self.score += ENEMY_SCORE  # Add score for kill enemy
-                        explosion=Explosion(enemy.center_x,enemy.center_y)
+
+                        explosion=Explosion(enemy.center_x,enemy.center_y) # Create Explosion
+
+                        for i in range(PARTICLE_COUNT): # Create Particle
+                            particle = Particle(
+                                enemy.center_x,
+                                enemy.center_y
+                            )
+                            self.particles.append(particle)
+
                         self.explosion_list.append(explosion)
                         enemy.remove_from_sprite_lists()
 
@@ -234,6 +254,13 @@ class Game(arcade.Window):
         for explosion in self.explosion_list:
             if explosion.update(delta_time):
                 self.explosion_list.remove(explosion)
+
+        # Update particles
+        for particle in self.particles[:]:
+            should_remove=particle.update(delta_time)
+
+            if should_remove:
+                self.particles.remove(particle)
 
 
         if len(self.enemy_list)==0:
