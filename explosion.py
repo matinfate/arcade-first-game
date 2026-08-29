@@ -8,7 +8,6 @@ class Explosion:
         self.y = y
 
         self.radius = 5
-        self.max_radius = 35
 
         self.lifetime = 0.5
         self.timer = 0
