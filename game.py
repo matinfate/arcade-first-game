@@ -248,7 +248,7 @@ class Game(arcade.Window):
                         enemy.remove_from_sprite_lists()
 
         # Update explosions
-        for explosion in self.explosion_list:
+        for explosion in self.explosion_list[:]:
             if explosion.update(delta_time):
                 self.explosion_list.remove(explosion)
 
