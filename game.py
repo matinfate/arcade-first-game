@@ -1,9 +1,6 @@
 import arcade
 import random
 
-from pyglet.experimental import particles
-
-import explosion
 from player import Player
 from enemy import Enemy, FastEnemy, TankEnemy
 from bullet import Bullet
