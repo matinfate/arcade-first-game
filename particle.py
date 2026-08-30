@@ -14,6 +14,11 @@ class Particle:
         self.x = x
         self.y = y
 
+        self.color = random.choice([
+            (255, 255, 0),
+            (255, 165, 0),
+            (255, 0, 0)
+        ])
         self.size = random.randint(3, 6)
 
         self.change_x = random.uniform(
@@ -34,18 +39,19 @@ class Particle:
         self.x+=self.change_x*delta_time
         self.y+=self.change_y*delta_time
 
-        self.size - PARTICLE_SHRINK_SPEED * delta_time
+        self.size = max(0,self.size - PARTICLE_SHRINK_SPEED * delta_time)
         
         return self.timer>=self.lifetime
 
     def draw(self):
         # Calculate transparency
         alpha = int(255 * (1 - self.timer / self.lifetime))
+        color=self.color[0],self.color[1],self.color[2],alpha
 
         # Create particale
         arcade.draw_circle_filled(
             self.x,
             self.y,
             self.size,
-            (255, 165, 0, alpha)
+            color
         )
