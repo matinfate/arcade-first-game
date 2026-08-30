@@ -42,7 +42,12 @@ class Game(arcade.Window):
         self.wave = 1
         self.enemy_count = 5
 
+        # Add cooldown for next wave
+        self.wave_delay = 2.0
+        self.wave_timer = 0
 
+        # Variable for Complete wave
+        self.wave_complete = False
 
         # Creating an enemy to start the game
         for i in range(self.enemy_count):
@@ -130,6 +135,16 @@ class Game(arcade.Window):
 
         # Show enemy wave
         arcade.draw_text(f"Wave:{self.wave}",10, 530, arcade.color.DARK_RED, 20)
+
+        # Show complate wave
+        if self.wave_complete and not self.game_over:
+            arcade.draw_text(
+                f"Wave {self.wave} Complete!",
+                250,
+                300,
+                arcade.color.YELLOW,
+                30
+            )
 
         # Show game over
         if self.game_over:
@@ -261,7 +276,13 @@ class Game(arcade.Window):
 
 
         if len(self.enemy_list)==0:
-            self.next_wave()
+            self.wave_complete=True
+            self.wave_timer+=delta_time
+
+            if self.wave_timer>=self.wave_delay:
+                self.next_wave()
+                self.wave_timer=0
+                self.wave_complete = False
 
     # Keyboard key press event.
     def on_key_press(self, key, modifiers):
@@ -315,12 +336,16 @@ class Game(arcade.Window):
     # Generate enemy automote
     def create_enemy(self):
 
+        normal_chance = max(50, 70 - (self.wave - 1) * 5)
+        fast_chance = min(25, 15 + (self.wave - 1) * 2)
+        tank_chance = 100 - normal_chance - fast_chance
+
         enemy_type = random.randint(1, 100)
 
-        if enemy_type <= 70:
+        if enemy_type <= normal_chance:
             enemy = Enemy()
 
-        elif enemy_type <= 85:
+        elif enemy_type <= normal_chance + fast_chance:
             enemy = FastEnemy()
 
         else:
