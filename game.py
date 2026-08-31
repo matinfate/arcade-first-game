@@ -106,6 +106,7 @@ class Game(arcade.Window):
 
         # Show player health bar
         max_health=PLAYER_HEALTH
+        health_x = 110
         health_width=200
         health_height=20
         health_ratio=self.player.health/max_health
@@ -113,7 +114,7 @@ class Game(arcade.Window):
 
         arcade.draw_rect_filled( # This defines Fill and color this rectangle.
             arcade.rect.XYWH( # This defines a rectangle.
-                10,
+                health_x,
                 40,
                 health_width,
                 health_height
@@ -123,7 +124,7 @@ class Game(arcade.Window):
 
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
-                10,
+                10 + current_health_width / 2,
                 40,
                 current_health_width,
                 health_height
