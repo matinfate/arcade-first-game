@@ -14,7 +14,6 @@ from settings import (
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
     PLAYER_HEALTH,
-    ENEMY_SCORE,
     BULLET_DAMAGE,
     PARTICLE_COUNT
 )
@@ -248,7 +247,7 @@ class Game(arcade.Window):
                     bullet.remove_from_sprite_lists()
 
                     if enemy.health<=0:
-                        self.score += ENEMY_SCORE  # Add score for kill enemy
+                        self.score += enemy.score  # Add score for kill enemy
 
                         explosion=Explosion(enemy.center_x,enemy.center_y) # Create Explosion
 

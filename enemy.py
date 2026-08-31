@@ -10,6 +10,8 @@ class Enemy(arcade.Sprite):
         self.scale = 0.2
         self.speed = ENEMY_SPEED
 
+        self.score = 10
+
         self.max_health = ENEMY_HEALTH
         self.health = self.max_health
 
@@ -52,6 +54,7 @@ class FastEnemy(Enemy):
         self.speed=100
         self.max_health=20
         self.health=self.max_health
+        self.score=20
 
 class TankEnemy(Enemy):
 
@@ -62,3 +65,4 @@ class TankEnemy(Enemy):
         self.speed = 30
         self.max_health = 80
         self.health = self.max_health
+        self.score=30

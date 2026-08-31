@@ -24,9 +24,6 @@ SHOOT_COOLDOWN = 0.25
 # Damage settings
 INVINCIBILITY_TIME = 1.0
 
-# Score settings
-ENEMY_SCORE = 10
-
 # Particle settings
 PARTICLE_MIN_SPEED = -100
 PARTICLE_MAX_SPEED = 100
