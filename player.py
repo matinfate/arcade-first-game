@@ -18,8 +18,11 @@ class Player(arcade.Sprite):
         self.scale = 0.2
 
         # Set the initial position of the player.
-        self.center_x = 400
-        self.center_y = 300
+        self.start_x = 400
+        self.start_y = 100
+
+        self.center_x = self.start_x
+        self.center_y = self.start_y
 
         # Store the player's movement speed.
         self.speed = PLAYER_SPEED

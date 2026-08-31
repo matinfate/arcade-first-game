@@ -366,11 +366,16 @@ class Game(arcade.Window):
         self.player.health = PLAYER_HEALTH
         self.score = 0
         self.invincibility_timer = 0
+
         self.invincible = False
         self.game_over = False
         self.player.visible = True
+
         self.wave = 1
         self.enemy_count = 5
+
+        self.player.center_x = self.player.start_x
+        self.player.center_y = self.player.start_y
 
         self.bullet_list.clear()
         self.enemy_list.clear()
