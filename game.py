@@ -221,7 +221,7 @@ class Game(arcade.Window):
             # If the enemy collides with the player,
             if arcade.check_for_collision(enemy,self.player):
                 if not self.invincible:
-                    self.player.health = max(0,self.player.health - self.player.damage)
+                    self.player.health = max(0,self.player.health - enemy.damage)
                     self.invincible=True
                     self.invincibility_timer=self.invincibility_time
                     enemy.remove_from_sprite_lists()

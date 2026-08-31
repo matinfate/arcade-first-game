@@ -15,6 +15,8 @@ class Enemy(arcade.Sprite):
         self.max_health = ENEMY_HEALTH
         self.health = self.max_health
 
+        self.damage = 10
+
         self.center_x = random.randint(50, 750)
         self.center_y = random.randint(400, 550)
 
@@ -55,6 +57,7 @@ class FastEnemy(Enemy):
         self.max_health=20
         self.health=self.max_health
         self.score=20
+        self.damage = 15
 
 class TankEnemy(Enemy):
 
@@ -63,6 +66,7 @@ class TankEnemy(Enemy):
 
         self.scale = 0.5
         self.speed = 30
-        self.max_health = 80
+        self.max_health = 50
         self.health = self.max_health
         self.score=30
+        self.damage = 25

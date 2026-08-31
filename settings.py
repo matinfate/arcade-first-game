@@ -6,7 +6,7 @@ SCREEN_TITLE = "My First Game"
 # Player settings
 PLAYER_SPEED = 200
 PLAYER_HEALTH = 100
-PLAYER_DAMAGE = 20
+
 
 # Enemy settings
 ENEMY_SPEED = 50
