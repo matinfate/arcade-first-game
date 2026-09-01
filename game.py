@@ -168,7 +168,7 @@ class Game(arcade.Window):
         # since the previous call to on_update().
 
         # If the game is Game Over, the player, enemies, and bullets no longer move.
-        if self.game_over and not self.game_started:
+        if self.game_over or not self.game_started:
             return
 
         # Damage cooldown
