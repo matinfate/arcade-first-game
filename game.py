@@ -158,7 +158,8 @@ class Game(arcade.Window):
 
         # Show game over
         if self.game_over:
-            arcade.draw_text("GAME OVER",270,300,arcade.color.RED_PURPLE,40)
+            arcade.draw_text("GAME OVER",SCREEN_WIDTH/2,300,arcade.color.RED_PURPLE,40,anchor_x="center")
+            arcade.draw_text("Press R to Restart",SCREEN_WIDTH/2,250,arcade.color.WHITE,20,anchor_x="center")
 
     def on_update(self, delta_time):
         # `on_update` is used to update the game state.
