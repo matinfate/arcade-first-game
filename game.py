@@ -73,6 +73,8 @@ class Game(arcade.Window):
         # Create a Score system
         self.score=0
 
+        # Create a game start variable
+        self.game_started=False
 
         # Create a game over variable
         self.game_over = False
@@ -83,6 +85,14 @@ class Game(arcade.Window):
 
         # Clear the previous frame.
         self.clear()
+
+        # Show menu
+        if not self.game_started:
+            arcade.draw_text("ARCADE GAME",250,350,arcade.color.WHITE,40)
+            arcade.draw_text("Press SPACE to Start",245,280,arcade.color.YELLOW,20)
+            arcade.draw_text("WASD: Move",300,220,arcade.color.WHITE,18 )
+            arcade.draw_text("SPACE: Shoot",295,190,arcade.color.WHITE,18)
+            return
 
         # Draw all sprites inside the SpriteList.
         self.player_list.draw()
@@ -157,7 +167,7 @@ class Game(arcade.Window):
         # since the previous call to on_update().
 
         # If the game is Game Over, the player, enemies, and bullets no longer move.
-        if self.game_over:
+        if self.game_over and not self.game_started:
             return
 
         # Damage cooldown
@@ -302,6 +312,11 @@ class Game(arcade.Window):
         # If D is pressed, set right_pressed to True.
         if key == arcade.key.D:
             self.player.right_pressed = True
+
+        # If Space pressed,start game
+        if key == arcade.key.SPACE and not self.game_started:
+            self.game_started = True
+            return
 
         # If Space pressed,create a bullet
         if key == arcade.key.SPACE and self.shoot_timer <= 0:
