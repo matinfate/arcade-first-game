@@ -354,7 +354,6 @@ class Game(arcade.Window):
 
         normal_chance = max(50, 70 - (self.wave - 1) * 5)
         fast_chance = min(25, 15 + (self.wave - 1) * 2)
-        tank_chance = 100 - normal_chance - fast_chance
 
         enemy_type = random.randint(1, 100)
 
