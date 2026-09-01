@@ -88,10 +88,10 @@ class Game(arcade.Window):
 
         # Show menu
         if not self.game_started:
-            arcade.draw_text("ARCADE GAME",250,350,arcade.color.WHITE,40)
-            arcade.draw_text("Press SPACE to Start",245,280,arcade.color.YELLOW,20)
-            arcade.draw_text("WASD: Move",300,220,arcade.color.WHITE,18 )
-            arcade.draw_text("SPACE: Shoot",295,190,arcade.color.WHITE,18)
+            arcade.draw_text("ARCADE GAME",SCREEN_WIDTH / 2,350,arcade.color.WHITE,40,anchor_x="center")
+            arcade.draw_text("Press SPACE to Start",SCREEN_WIDTH / 2,280,arcade.color.YELLOW,20,anchor_x="center")
+            arcade.draw_text("WASD: Move",SCREEN_WIDTH / 2,220,arcade.color.WHITE,18,anchor_x="center")
+            arcade.draw_text("SPACE: Shoot",SCREEN_WIDTH / 2,190,arcade.color.WHITE,18,anchor_x="center")
             return
 
         # Draw all sprites inside the SpriteList.
