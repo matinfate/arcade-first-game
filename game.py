@@ -76,6 +76,9 @@ class Game(arcade.Window):
         # Create a game start variable
         self.game_started=False
 
+        # Create a pause variable
+        self.paused = False
+
         # Create a game over variable
         self.game_over = False
 
@@ -93,6 +96,11 @@ class Game(arcade.Window):
             arcade.draw_text("WASD: Move",SCREEN_WIDTH / 2,220,arcade.color.WHITE,18,anchor_x="center")
             arcade.draw_text("SPACE: Shoot",SCREEN_WIDTH / 2,190,arcade.color.WHITE,18,anchor_x="center")
             return
+
+        # Show pause menu
+        if self.paused:
+            arcade.draw_text("PAUSED",SCREEN_WIDTH/2,300,arcade.color.YELLOW,40,anchor_x="center")
+            arcade.draw_text("Press ESC to Resume",SCREEN_WIDTH/2,250,arcade.color.WHITE,20,anchor_x="center")
 
         # Draw all sprites inside the SpriteList.
         self.player_list.draw()
@@ -168,7 +176,7 @@ class Game(arcade.Window):
         # since the previous call to on_update().
 
         # If the game is Game Over, the player, enemies, and bullets no longer move.
-        if self.game_over or not self.game_started:
+        if self.game_over or not self.game_started or self.paused:
             return
 
         # Damage cooldown
@@ -314,17 +322,21 @@ class Game(arcade.Window):
         if key == arcade.key.D:
             self.player.right_pressed = True
 
+        # If Space pressed,create a bullet
+        if key == arcade.key.SPACE and self.shoot_timer <= 0 and not self.paused:
+            bullet = Bullet(self.player.center_x,self.player.top)
+
+            self.bullet_list.append(bullet)
+            self.shoot_timer = self.shoot_cooldown
+
         # If Space pressed,start game
         if key == arcade.key.SPACE and not self.game_started:
             self.game_started = True
             return
 
-        # If Space pressed,create a bullet
-        if key == arcade.key.SPACE and self.shoot_timer <= 0:
-            bullet = Bullet(self.player.center_x,self.player.top)
-
-            self.bullet_list.append(bullet)
-            self.shoot_timer = self.shoot_cooldown
+        # If Esc pressed,pause game or unpause game
+        if key == arcade.key.ESCAPE and self.game_started and not self.game_over:
+            self.paused = not self.paused
 
         # If R pressed. Restart game
         if key == arcade.key.R and self.game_over:
