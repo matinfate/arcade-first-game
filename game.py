@@ -73,6 +73,9 @@ class Game(arcade.Window):
         # Create a Score system
         self.score=0
 
+        # Create a Kill Counter system
+        self.kills = 0
+
         # Create a game start variable
         self.game_started=False
 
@@ -109,6 +112,9 @@ class Game(arcade.Window):
 
         # Show score
         arcade.draw_text(f"Score: {self.score}", 10, 570, arcade.color.WHITE, 20)
+
+        # Show kills
+        arcade.draw_text(f"Kills: {self.kills}", 10, 500, arcade.color.WHITE, 20)
 
         # Show enemy health bar
         for enemy in self.enemy_list:
@@ -268,6 +274,7 @@ class Game(arcade.Window):
 
                     if enemy.health<=0:
                         self.score += enemy.score  # Add score for kill enemy
+                        self.kills+=1 # Add kill
 
                         explosion=Explosion(enemy.center_x,enemy.center_y) # Create Explosion
 
@@ -393,6 +400,7 @@ class Game(arcade.Window):
     def restart_game(self):
         self.player.health = PLAYER_HEALTH
         self.score = 0
+        self.kills = 0
         self.invincibility_timer = 0
 
         self.invincible = False
