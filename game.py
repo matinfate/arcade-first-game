@@ -100,15 +100,15 @@ class Game(arcade.Window):
             arcade.draw_text("SPACE: Shoot",SCREEN_WIDTH / 2,190,arcade.color.WHITE,18,anchor_x="center")
             return
 
-        # Show pause menu
-        if self.paused:
-            arcade.draw_text("PAUSED",SCREEN_WIDTH/2,300,arcade.color.YELLOW,40,anchor_x="center")
-            arcade.draw_text("Press ESC to Resume",SCREEN_WIDTH/2,250,arcade.color.WHITE,20,anchor_x="center")
-
         # Draw all sprites inside the SpriteList.
         self.player_list.draw()
         self.enemy_list.draw()
         self.bullet_list.draw()
+
+        # Show pause menu
+        if self.paused:
+            arcade.draw_text("PAUSED",SCREEN_WIDTH/2,300,arcade.color.YELLOW,40,anchor_x="center")
+            arcade.draw_text("Press ESC to Resume",SCREEN_WIDTH/2,250,arcade.color.WHITE,20,anchor_x="center")
 
         # Show score
         arcade.draw_text(f"Score: {self.score}", 10, 570, arcade.color.WHITE, 20)
@@ -329,17 +329,17 @@ class Game(arcade.Window):
         if key == arcade.key.D:
             self.player.right_pressed = True
 
-        # If Space pressed,create a bullet
-        if key == arcade.key.SPACE and self.shoot_timer <= 0 and not self.paused:
-            bullet = Bullet(self.player.center_x,self.player.top)
-
-            self.bullet_list.append(bullet)
-            self.shoot_timer = self.shoot_cooldown
-
-        # If Space pressed,start game
+        # Start game
         if key == arcade.key.SPACE and not self.game_started:
             self.game_started = True
             return
+
+        # Shoot bullet
+        if key == arcade.key.SPACE and self.shoot_timer <= 0 and not self.paused:
+            bullet = Bullet(self.player.center_x, self.player.top)
+
+            self.bullet_list.append(bullet)
+            self.shoot_timer = self.shoot_cooldown
 
         # If Esc pressed,pause game or unpause game
         if key == arcade.key.ESCAPE and self.game_started and not self.game_over:
