@@ -401,10 +401,17 @@ class Game(arcade.Window):
         self.player.health = PLAYER_HEALTH
         self.score = 0
         self.kills = 0
+
         self.invincibility_timer = 0
+        self.shoot_timer = 0
 
         self.invincible = False
         self.game_over = False
+        self.paused = False
+
+        self.wave_complete = False
+        self.wave_timer = 0
+
         self.player.visible = True
 
         self.wave = 1
