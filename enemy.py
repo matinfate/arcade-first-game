@@ -20,6 +20,18 @@ class Enemy(arcade.Sprite):
         self.center_x = random.randint(50, 750)
         self.center_y = random.randint(400, 550)
 
+    def move_toward_player(self,player,delta_time):
+
+        if self.center_x < player.center_x:
+            self.center_x += self.speed*delta_time
+        elif self.center_x > player.center_x:
+            self.center_x -= self.speed*delta_time
+
+        if self.center_y < player.center_y:
+            self.center_y += self.speed * delta_time
+        elif self.center_y > player.center_y:
+            self.center_y -= self.speed * delta_time
+
     def draw_health_bar(self):
         health_width = 40
         health_height = 5

@@ -205,18 +205,7 @@ class Game(arcade.Window):
 
         # Move enemies toward the player
         for enemy in self.enemy_list:
-
-            if enemy.center_x < self.player.center_x:
-                enemy.center_x += enemy.speed * delta_time
-
-            elif enemy.center_x > self.player.center_x:
-                enemy.center_x -= enemy.speed * delta_time
-
-            if enemy.center_y < self.player.center_y:
-                enemy.center_y += enemy.speed * delta_time
-
-            elif enemy.center_y > self.player.center_y:
-                enemy.center_y -= enemy.speed * delta_time
+            enemy.move_toward_player(self.player, delta_time)
 
             # Handle enemy-player collision
             if arcade.check_for_collision(enemy,self.player):
