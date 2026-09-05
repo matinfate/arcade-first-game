@@ -108,7 +108,7 @@ class Game(arcade.Window):
         for explosion in self.explosion_list:
             explosion.draw()
 
-        # Draw partiles
+        # Draw particles
         for particle in self.particles:
             particle.draw()
 
@@ -218,6 +218,12 @@ class Game(arcade.Window):
 
                 if self.player.health <= 0:
                     self.game_over = True
+
+        # Prevent enemies from overlapping each other.
+        for enemy in self.enemy_list:
+            for other in self.enemy_list:
+                if enemy!=other:
+                    enemy.avoid_enemy(other,delta_time)
 
         # Move bullets
         for bullet in self.bullet_list:

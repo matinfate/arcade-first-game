@@ -59,6 +59,18 @@ class Enemy(arcade.Sprite):
             arcade.color.GREEN
         )
 
+    def avoid_enemy(self,other,delta_time):
+        if arcade.check_for_collision(self, other):
+            if self.center_x < other.center_x:
+                self.center_x -= self.speed*delta_time
+            elif self.center_x > other.center_x:
+                self.center_x += self.speed*delta_time
+
+            if self.center_y < other.center_y:
+                self.center_y -= self.speed*delta_time
+            elif self.center_y > other.center_y:
+                self.center_y += self.speed*delta_time
+
 class FastEnemy(Enemy):
 
     def __init__(self):
@@ -70,7 +82,6 @@ class FastEnemy(Enemy):
         self.health = self.max_health
         self.score = 20
         self.damage = 15
-
 
 class TankEnemy(Enemy):
 
