@@ -6,6 +6,7 @@ from enemy import Enemy, FastEnemy, TankEnemy
 from bullet import Bullet
 from explosion import Explosion
 from particle import Particle
+from power_up import HealthPowerUp
 
 from settings import (
     SCREEN_WIDTH,
@@ -51,6 +52,9 @@ class Game(arcade.Window):
         # Sprite list for bullets
         self.bullet_list = arcade.SpriteList()
 
+        # Create a list to store health power-ups.
+        self.power_up_list = arcade.SpriteList()
+
         # Lists for explosions and particles
         self.explosion_list = []
         self.particles = []
@@ -88,6 +92,7 @@ class Game(arcade.Window):
         self.player_list.draw()
         self.enemy_list.draw()
         self.bullet_list.draw()
+        self.power_up_list.draw()
 
         # Pause menu
         if self.paused:
@@ -245,6 +250,13 @@ class Game(arcade.Window):
                         self.score += enemy.score
                         self.kills+=1
 
+                        # Spawn a health power-up with a 20% chance.
+                        if random.random() < 0.9:
+                            power_up = HealthPowerUp()
+                            power_up.center_x = enemy.center_x
+                            power_up.center_y = enemy.center_y
+                            self.power_up_list.append(power_up)
+
                         # Create explosion effect
                         explosion=Explosion(enemy.center_x,enemy.center_y)
 
@@ -269,6 +281,26 @@ class Game(arcade.Window):
 
             if should_remove:
                 self.particles.remove(particle)
+
+        # Move health power-ups downward.
+        for power_up in self.power_up_list:
+            power_up.fall(delta_time)
+
+            # Remove power-up when it leaves the screen
+            if power_up.top < 0:
+                power_up.remove_from_sprite_lists()
+                continue
+
+            # Check collision with player
+            if arcade.check_for_collision(power_up, self.player):
+                # Restore player health
+                self.player.health = min(
+                    PLAYER_HEALTH,
+                    self.player.health + power_up.health_amount
+                )
+
+                # Remove the power-up after collecting it
+                power_up.remove_from_sprite_lists()
 
         # Check if the current wave is complete
         if len(self.enemy_list)==0:
