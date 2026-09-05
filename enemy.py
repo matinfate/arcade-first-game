@@ -65,11 +65,12 @@ class FastEnemy(Enemy):
         super().__init__("assets/image/fast_enemy.png")
 
         self.scale = 0.1
-        self.speed=100
-        self.max_health=20
-        self.health=self.max_health
-        self.score=20
+        self.speed = 100
+        self.max_health = 20
+        self.health = self.max_health
+        self.score = 20
         self.damage = 15
+
 
 class TankEnemy(Enemy):
 
@@ -80,5 +81,5 @@ class TankEnemy(Enemy):
         self.speed = 30
         self.max_health = 50
         self.health = self.max_health
-        self.score=30
+        self.score = 30
         self.damage = 25
