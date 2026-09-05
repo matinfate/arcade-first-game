@@ -345,7 +345,17 @@ class Game(arcade.Window):
         else:
             enemy = TankEnemy()
 
+        # Set a safe spawn position away from the player.
+        while True:
+            enemy.center_x = random.randint(50, SCREEN_WIDTH - 50)
+            enemy.center_y = random.randint(350, SCREEN_HEIGHT - 50)
+
+            if not arcade.check_for_collision(enemy, self.player):
+                break
+
         self.enemy_list.append(enemy)
+
+
 
     # Start the next wave
     def next_wave(self):
