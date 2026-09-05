@@ -350,7 +350,11 @@ class Game(arcade.Window):
             enemy.center_x = random.randint(50, SCREEN_WIDTH - 50)
             enemy.center_y = random.randint(350, SCREEN_HEIGHT - 50)
 
-            if not arcade.check_for_collision(enemy, self.player):
+            dx=enemy.center_x - self.player.center_x
+            dy=enemy.center_y - self.player.center_y
+            distance=(dx ** 2 + dy ** 2) ** 0.5
+
+            if distance >= 150:
                 break
 
         self.enemy_list.append(enemy)
