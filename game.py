@@ -6,7 +6,7 @@ from enemy import Enemy, FastEnemy, TankEnemy
 from bullet import Bullet
 from explosion import Explosion
 from particle import Particle
-from power_up import HealthPowerUp
+from power_up import HealthPowerUp, ShieldPowerUp, RapidFirePowerUp
 
 from settings import (
     SCREEN_WIDTH,
@@ -90,6 +90,17 @@ class Game(arcade.Window):
 
         # Draw game sprites
         self.player_list.draw()
+
+        # Draw player shield
+        if self.player.shield_active:
+            arcade.draw_circle_outline(
+                self.player.center_x,
+                self.player.center_y,
+                self.player.width * 0.7,
+                arcade.color.BLUE,
+                3
+            )
+
         self.enemy_list.draw()
         self.bullet_list.draw()
         self.power_up_list.draw()
@@ -184,6 +195,22 @@ class Game(arcade.Window):
         if self.shoot_timer>0:
             self.shoot_timer -= delta_time
 
+        # Shield Time Management
+        if self.player.shield_active:
+            self.player.shield_timer -= delta_time
+
+            if self.player.shield_timer <= 0:
+                self.player.shield_active = False
+                self.player.shield_timer = 0
+
+        # Rapid fire time management
+        if self.player.rapid_fire_active:
+            self.player.rapid_fire_timer -= delta_time
+
+            if self.player.rapid_fire_timer <= 0:
+                self.player.rapid_fire_active = False
+                self.player.rapid_fire_timer = 0
+
         # Reset movement
         self.player.change_x = 0
         self.player.change_y = 0
@@ -214,15 +241,20 @@ class Game(arcade.Window):
 
             # Handle enemy-player collision
             if arcade.check_for_collision(enemy,self.player):
-                if not self.invincible:
-                    self.player.health = max(0,self.player.health - enemy.damage)
-                    self.invincible=True
-                    self.invincibility_timer=self.invincibility_time
+                if self.player.shield_active:
                     enemy.remove_from_sprite_lists()
                     self.create_enemy()
 
-                if self.player.health <= 0:
-                    self.game_over = True
+                elif not self.invincible:
+                    self.player.health = max(0, self.player.health - enemy.damage)
+                    self.invincible = True
+                    self.invincibility_timer = self.invincibility_time
+
+                    enemy.remove_from_sprite_lists()
+                    self.create_enemy()
+
+                    if self.player.health <= 0:
+                        self.game_over = True
 
         # Prevent enemies from overlapping each other.
         for enemy in self.enemy_list:
@@ -250,9 +282,10 @@ class Game(arcade.Window):
                         self.score += enemy.score
                         self.kills+=1
 
-                        # Spawn a health power-up with a 20% chance.
-                        if random.random() < 0.9:
-                            power_up = HealthPowerUp()
+                        # Spawn a  power-up with a 20% chance
+                        if random.random() < 0.2:
+                            power_up_type=random.choice([HealthPowerUp,RapidFirePowerUp,ShieldPowerUp])
+                            power_up = power_up_type()
                             power_up.center_x = enemy.center_x
                             power_up.center_y = enemy.center_y
                             self.power_up_list.append(power_up)
@@ -282,7 +315,7 @@ class Game(arcade.Window):
             if should_remove:
                 self.particles.remove(particle)
 
-        # Move health power-ups downward.
+        # Move power-ups downward.
         for power_up in self.power_up_list:
             power_up.fall(delta_time)
 
@@ -293,13 +326,7 @@ class Game(arcade.Window):
 
             # Check collision with player
             if arcade.check_for_collision(power_up, self.player):
-                # Restore player health
-                self.player.health = min(
-                    PLAYER_HEALTH,
-                    self.player.health + power_up.health_amount
-                )
-
-                # Remove the power-up after collecting it
+                power_up.collect(self.player)
                 power_up.remove_from_sprite_lists()
 
         # Check if the current wave is complete
@@ -336,7 +363,11 @@ class Game(arcade.Window):
             bullet = Bullet(self.player.center_x, self.player.top)
 
             self.bullet_list.append(bullet)
-            self.shoot_timer = self.shoot_cooldown
+
+            if self.player.rapid_fire_active:
+                self.shoot_timer = self.shoot_cooldown / 3
+            else:
+                self.shoot_timer = self.shoot_cooldown
 
         # Toggle pause
         if key == arcade.key.ESCAPE and self.game_started and not self.game_over:
@@ -391,8 +422,6 @@ class Game(arcade.Window):
 
         self.enemy_list.append(enemy)
 
-
-
     # Start the next wave
     def next_wave(self):
         self.wave += 1
@@ -412,6 +441,13 @@ class Game(arcade.Window):
         self.shoot_timer = 0
 
         self.invincible = False
+
+        self.player.shield_active = False
+        self.player.shield_timer = 0
+
+        self.player.rapid_fire_active = False
+        self.player.rapid_fire_timer = 0
+
         self.game_over = False
         self.paused = False
 
@@ -428,6 +464,7 @@ class Game(arcade.Window):
 
         self.bullet_list.clear()
         self.enemy_list.clear()
+        self.power_up_list.clear()
 
         for i in range(self.enemy_count):
             self.create_enemy()

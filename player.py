@@ -40,6 +40,13 @@ class Player(arcade.Sprite):
         # Create a Health for player
         self.health = PLAYER_HEALTH
 
+        # Create a Shield for player
+        self.shield_active = False
+        self.shield_timer = 0
+
+        # Create a Rapid fire for player
+        self.rapid_fire_active = False
+        self.rapid_fire_timer = 0
 
     # keep player inside screen
     def keep_inside_screen(self):
@@ -54,3 +61,11 @@ class Player(arcade.Sprite):
 
         if self.top > SCREEN_HEIGHT:
             self.top = SCREEN_HEIGHT
+
+    def activate_shield(self, duration):
+        self.shield_active = True
+        self.shield_timer = duration
+
+    def activate_rapid_fire(self, duration):
+        self.rapid_fire_active = True
+        self.rapid_fire_timer = duration
