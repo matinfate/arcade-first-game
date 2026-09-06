@@ -44,6 +44,14 @@ game development, object-oriented programming, and software architecture.
 * [x] Pause System
 * [x] Pause Menu
 * [x] Resume with ESC
+* [x] Health Power-Up
+* [x] Shield Power-Up
+* [x] Rapid Fire Power-Up
+* [x] Power-Up Falling System
+* [x] Power-Up Collision and Collection
+* [x] Power-Up Duration Timers
+* [x] Shield Visual Effect
+* [x] Rapid Fire Shooting Effect
 
 ## 👾 Enemy Types
 
@@ -55,6 +63,16 @@ The game currently includes three different enemy types:
 
 Enemy types are randomly selected, and their appearance becomes more difficult as the wave increases.
 
+## ⚡ Power-Ups
+
+The game currently includes three different power-ups:
+
+* **Health Power-Up** — Restores player health
+* **Shield Power-Up** — Protects the player from enemy damage for a limited time
+* **Rapid Fire Power-Up** — Temporarily increases the player's shooting speed
+
+Power-ups fall from defeated enemies and can be collected by the player.
+
 ## 📚 What I've Learned
 
 * [x] Arcade Window
@@ -65,11 +83,14 @@ Enemy types are randomly selected, and their appearance becomes more difficult a
 * [x] Sprite
 * [x] SpriteList
 * [x] Object-Oriented Programming
+* [x] Inheritance
+* [x] Polymorphism
 * [x] Collision Detection
 * [x] Game State Management
 * [x] Delta Time
 * [x] Timers and Cooldowns
 * [x] Health Systems
+* [x] Power-Up Systems
 * [x] Game Over and Restart Logic
 * [x] Wave Systems
 * [x] Randomized Gameplay
@@ -104,6 +125,7 @@ arcade-first-game/
 ├── bullet.py
 ├── explosion.py
 ├── particle.py
+├── power_up.py
 ├── settings.py
 └── README.md
 ```
