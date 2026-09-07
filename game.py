@@ -156,6 +156,82 @@ class Game(arcade.Window):
             arcade.color.GREEN
         )  # Current health
 
+        # Power ups bars
+        bar_x = 10
+        bar_width = 200
+        bar_height = 20
+
+        # Shield Bar
+        if self.player.shield_active:
+            max_duration = 5.0
+            ratio = max(0, self.player.shield_timer / max_duration)
+            current_width = bar_width * ratio
+
+            arcade.draw_rect_filled(
+                arcade.rect.XYWH(
+                    bar_x + bar_width / 2,
+                    110,
+                    bar_width,
+                    bar_height
+                ),
+                arcade.color.DARK_BLUE
+            )
+
+            arcade.draw_rect_filled(
+                arcade.rect.XYWH(
+                    bar_x + current_width / 2,
+                    110,
+                    current_width,
+                    bar_height
+                ),
+                arcade.color.BLUE
+            )
+
+            arcade.draw_text(
+                f"{max(0, self.player.shield_timer):.1f}s",
+                bar_x + bar_width / 2,
+                102,
+                arcade.color.WHITE,
+                14,
+                anchor_x="center"
+            )
+
+        # Rapid Fire Bar
+        if self.player.rapid_fire_active:
+
+            max_duration = 5.0
+            ratio = max(0, self.player.rapid_fire_timer / max_duration)
+            current_width = bar_width * ratio
+
+            arcade.draw_rect_filled(
+                arcade.rect.XYWH(
+                    bar_x + bar_width / 2,
+                    80,
+                    bar_width,
+                    bar_height
+                ),
+                arcade.color.DARK_ORANGE
+            )
+
+            arcade.draw_rect_filled(
+                arcade.rect.XYWH(
+                    bar_x + current_width / 2,
+                    80,
+                    current_width,
+                    bar_height
+                ),
+                arcade.color.ORANGE
+            )
+
+            arcade.draw_text(
+                f"{max(0, self.player.rapid_fire_timer):.1f}s",
+                bar_x + bar_width / 2,
+                72,
+                arcade.color.WHITE,
+                14,
+                anchor_x="center"
+            )
+
         # Display current wave
         arcade.draw_text(f"Wave:{self.wave}",10, 530, arcade.color.DARK_RED, 20)
 
@@ -283,7 +359,7 @@ class Game(arcade.Window):
                         self.kills+=1
 
                         # Spawn a  power-up with a 20% chance
-                        if random.random() < 0.2:
+                        if random.random() < 0.9:
                             power_up_type=random.choice([HealthPowerUp,RapidFirePowerUp,ShieldPowerUp])
                             power_up = power_up_type()
                             power_up.center_x = enemy.center_x
