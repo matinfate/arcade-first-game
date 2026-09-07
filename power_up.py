@@ -2,6 +2,18 @@ import arcade
 
 from settings import PLAYER_HEALTH
 
+HEALTH_POWERUP_TEXTURE = arcade.load_texture(
+    "assets/image/health_powerup.png"
+)
+
+SHIELD_POWERUP_TEXTURE = arcade.load_texture(
+    "assets/image/shield_powerup.png"
+)
+
+RAPID_FIRE_POWERUP_TEXTURE = arcade.load_texture(
+    "assets/image/rapid_fire_powerup.png"
+)
+
 class PowerUp(arcade.Sprite):
 
     def __init__(self, image, scale=0.02, speed=80):
@@ -16,7 +28,7 @@ class PowerUp(arcade.Sprite):
 class HealthPowerUp(PowerUp):
 
     def __init__(self):
-        super().__init__("assets/image/health_powerup.png")
+        super().__init__(HEALTH_POWERUP_TEXTURE)
 
         self.health_amount = 25
 
@@ -29,7 +41,7 @@ class HealthPowerUp(PowerUp):
 class ShieldPowerUp(PowerUp):
 
     def __init__(self):
-        super().__init__("assets/image/shield_powerup.png")
+        super().__init__(SHIELD_POWERUP_TEXTURE)
 
         self.duration = 5.0
 
@@ -39,7 +51,7 @@ class ShieldPowerUp(PowerUp):
 class RapidFirePowerUp(PowerUp):
 
     def __init__(self):
-        super().__init__("assets/image/rapid_fire_powerup.png")
+        super().__init__(RAPID_FIRE_POWERUP_TEXTURE)
 
         self.duration = 5.0
 
