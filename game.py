@@ -359,7 +359,7 @@ class Game(arcade.Window):
                         self.kills+=1
 
                         # Spawn a  power-up with a 20% chance
-                        if random.random() < 0.9:
+                        if random.random() < 0.2:
                             power_up_type=random.choice([HealthPowerUp,RapidFirePowerUp,ShieldPowerUp])
                             power_up = power_up_type()
                             power_up.center_x = enemy.center_x
