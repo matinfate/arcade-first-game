@@ -50,16 +50,21 @@ game development, object-oriented programming, and software architecture.
 * [x] Power-Up Falling System
 * [x] Power-Up Collision and Collection
 * [x] Power-Up Duration Timers
+* [x] Power-Up Status UI
 * [x] Shield Visual Effect
 * [x] Rapid Fire Shooting Effect
+* [x] Fast Enemy Zigzag Movement
+* [x] Tank Enemy Knockback
+* [x] Optimized Enemy Collision Checks
+* [x] Power-Up Texture Preloading
 
 ## 👾 Enemy Types
 
 The game currently includes three different enemy types:
 
 * **Normal Enemy** — Balanced speed, health, and damage
-* **Fast Enemy** — Faster movement with lower health
-* **Tank Enemy** — High health and damage but slower movement
+* **Fast Enemy** — Faster movement, lower health, and zigzag movement
+* **Tank Enemy** — High health and damage, slower movement, and knockback effect
 
 Enemy types are randomly selected, and their appearance becomes more difficult as the wave increases.
 
@@ -72,6 +77,10 @@ The game currently includes three different power-ups:
 * **Rapid Fire Power-Up** — Temporarily increases the player's shooting speed
 
 Power-ups fall from defeated enemies and can be collected by the player.
+
+Active power-ups display a progress bar showing their remaining duration.
+
+Power-up textures are preloaded to prevent lag when a power-up appears for the first time.
 
 ## 📚 What I've Learned
 
@@ -94,8 +103,11 @@ Power-ups fall from defeated enemies and can be collected by the player.
 * [x] Game Over and Restart Logic
 * [x] Wave Systems
 * [x] Randomized Gameplay
+* [x] Enemy AI and Movement Behaviors
+* [x] Knockback Mechanics
 * [x] Particle Effects
 * [x] Basic Game UI
+* [x] Performance Optimization
 * [x] Code Refactoring
 * [x] Separating Game Components into Multiple Files
 * [x] Managing Game Settings with Constants
@@ -136,4 +148,4 @@ Build a complete 2D arcade shooter while improving my
 Python, object-oriented programming, and game development skills.
 
 This project is also a way for me to learn how to structure,
-develop, debug, and maintain a real software project step-by-step.
+develop, debug, optimize, and maintain a real software project step-by-step.
