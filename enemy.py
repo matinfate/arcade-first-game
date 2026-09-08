@@ -112,3 +112,5 @@ class TankEnemy(Enemy):
         self.health = self.max_health
         self.score = 30
         self.damage = 25
+
+        self.knockback = 150

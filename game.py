@@ -322,7 +322,19 @@ class Game(arcade.Window):
                     self.create_enemy()
 
                 elif not self.invincible:
-                    self.player.health = max(0, self.player.health - enemy.damage)
+                    self.player.health = max( 0,self.player.health - enemy.damage  )
+
+                    # Tank knockback
+                    if isinstance(enemy, TankEnemy):
+                        dx = self.player.center_x - enemy.center_x
+                        dy = self.player.center_y - enemy.center_y
+                        distance = (dx ** 2 + dy ** 2) ** 0.5
+
+                        if distance > 0:
+                            self.player.center_x += ( dx / distance * enemy.knockback )
+                            self.player.center_y += ( dy / distance * enemy.knockback )
+                            self.player.keep_inside_screen()
+
                     self.invincible = True
                     self.invincibility_timer = self.invincibility_time
 
