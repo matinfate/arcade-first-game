@@ -83,6 +83,24 @@ class FastEnemy(Enemy):
         self.score = 20
         self.damage = 15
 
+        self.zigzag_timer = 0
+        self.zigzag_direction = 1
+
+    def move_toward_player(self, player, delta_time):
+        # Move toward the player
+        super().move_toward_player(player, delta_time)
+
+        # Update zigzag timer
+        self.zigzag_timer += delta_time
+
+        # Change direction every 0.4 seconds
+        if self.zigzag_timer >= 0.4:
+            self.zigzag_timer = 0
+            self.zigzag_direction *= -1
+
+        # Add horizontal zigzag movement
+        self.center_x += (50 * self.zigzag_direction * delta_time)
+
 class TankEnemy(Enemy):
 
     def __init__(self):
