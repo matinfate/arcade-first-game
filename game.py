@@ -333,10 +333,13 @@ class Game(arcade.Window):
                         self.game_over = True
 
         # Prevent enemies from overlapping each other.
-        for enemy in self.enemy_list:
-            for other in self.enemy_list:
-                if enemy!=other:
-                    enemy.avoid_enemy(other,delta_time)
+        for i in range(len(self.enemy_list)):
+            enemy = self.enemy_list[i]
+
+            for j in range(i + 1, len(self.enemy_list)):
+                other = self.enemy_list[j]
+                enemy.avoid_enemy(other, delta_time)
+                other.avoid_enemy(enemy, delta_time)
 
         # Move bullets
         for bullet in self.bullet_list:
