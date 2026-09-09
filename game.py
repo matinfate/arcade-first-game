@@ -77,18 +77,47 @@ class Game(arcade.Window):
         self.paused = False
         self.game_over = False
 
-    def on_draw(self):
-        self.clear()
+    def draw_main_menu(self):
 
-        # Main menu
-        if not self.game_started:
-            arcade.draw_text("ARCADE GAME",SCREEN_WIDTH / 2,350,arcade.color.WHITE,40,anchor_x="center")
-            arcade.draw_text("Press SPACE to Start",SCREEN_WIDTH / 2,280,arcade.color.YELLOW,20,anchor_x="center")
-            arcade.draw_text("WASD: Move",SCREEN_WIDTH / 2,220,arcade.color.WHITE,18,anchor_x="center")
-            arcade.draw_text("SPACE: Shoot",SCREEN_WIDTH / 2,190,arcade.color.WHITE,18,anchor_x="center")
-            return
+        arcade.draw_text(
+            "ARCADE GAME",
+            SCREEN_WIDTH / 2,
+            350,
+            arcade.color.WHITE,
+            40,
+            anchor_x="center"
+        )
 
-        # Draw game sprites
+        arcade.draw_text(
+            "Press SPACE to Start",
+            SCREEN_WIDTH / 2,
+            280,
+            arcade.color.YELLOW,
+            20,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            "WASD: Move",
+            SCREEN_WIDTH / 2,
+            220,
+            arcade.color.WHITE,
+            18,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            "SPACE: Shoot",
+            SCREEN_WIDTH / 2,
+            190,
+            arcade.color.WHITE,
+            18,
+            anchor_x="center"
+        )
+
+    def draw_game_objects(self):
+
+        # Draw player
         self.player_list.draw()
 
         # Draw player shield
@@ -101,20 +130,14 @@ class Game(arcade.Window):
                 3
             )
 
+        # Draw enemies
         self.enemy_list.draw()
+
+        # Draw bullets
         self.bullet_list.draw()
+
+        # Draw power-ups
         self.power_up_list.draw()
-
-        # Pause menu
-        if self.paused:
-            arcade.draw_text("PAUSED",SCREEN_WIDTH/2,300,arcade.color.YELLOW,40,anchor_x="center")
-            arcade.draw_text("Press ESC to Resume",SCREEN_WIDTH/2,250,arcade.color.WHITE,20,anchor_x="center")
-
-        # Display score
-        arcade.draw_text(f"Score: {self.score}", 10, 570, arcade.color.WHITE, 20)
-
-        # Display kill count
-        arcade.draw_text(f"Kills: {self.kills}", 10, 500, arcade.color.WHITE, 20)
 
         # Draw enemy health bars
         for enemy in self.enemy_list:
@@ -128,23 +151,43 @@ class Game(arcade.Window):
         for particle in self.particles:
             particle.draw()
 
+    def draw_game_ui(self):
+
+        # Display score
+        arcade.draw_text(
+            f"Score: {self.score}",
+            10,
+            570,
+            arcade.color.WHITE,
+            20
+        )
+
+        # Display kill count
+        arcade.draw_text(
+            f"Kills: {self.kills}",
+            10,
+            500,
+            arcade.color.WHITE,
+            20
+        )
+
         # Draw player health bar
-        max_health=PLAYER_HEALTH
+        max_health = PLAYER_HEALTH
         health_x = 110
-        health_width=200
-        health_height=20
-        health_ratio=self.player.health/max_health
+        health_width = 200
+        health_height = 20
+        health_ratio = self.player.health / max_health
         current_health_width = health_width * health_ratio
 
-        arcade.draw_rect_filled( # This defines Fill and color this rectangle.
-            arcade.rect.XYWH( # This defines a rectangle.
+        arcade.draw_rect_filled(
+            arcade.rect.XYWH(
                 health_x,
                 40,
                 health_width,
                 health_height
             ),
             arcade.color.DARK_RED
-        )  # Health bar background
+        )
 
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
@@ -154,9 +197,19 @@ class Game(arcade.Window):
                 health_height
             ),
             arcade.color.GREEN
-        )  # Current health
+        )
 
-        # Power ups bars
+        # Display current wave
+        arcade.draw_text(
+            f"Wave:{self.wave}",
+            10,
+            530,
+            arcade.color.DARK_RED,
+            20
+        )
+
+    def draw_power_up_bars(self):
+
         bar_x = 10
         bar_width = 200
         bar_height = 20
@@ -198,7 +251,6 @@ class Game(arcade.Window):
 
         # Rapid Fire Bar
         if self.player.rapid_fire_active:
-
             max_duration = 5.0
             ratio = max(0, self.player.rapid_fire_timer / max_duration)
             current_width = bar_width * ratio
@@ -232,43 +284,94 @@ class Game(arcade.Window):
                 anchor_x="center"
             )
 
-        # Display current wave
-        arcade.draw_text(f"Wave:{self.wave}",10, 530, arcade.color.DARK_RED, 20)
+    def draw_pause_menu(self):
+
+        arcade.draw_text(
+            "PAUSED",
+            SCREEN_WIDTH / 2,
+            300,
+            arcade.color.YELLOW,
+            40,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            "Press ESC to Resume",
+            SCREEN_WIDTH / 2,
+            250,
+            arcade.color.WHITE,
+            20,
+            anchor_x="center"
+        )
+
+    def draw_wave_complete(self):
+
+        arcade.draw_text(
+            f"Wave {self.wave} Complete!",
+            250,
+            300,
+            arcade.color.YELLOW,
+            30
+        )
+
+    def draw_game_over(self):
+
+        arcade.draw_text(
+            "GAME OVER",
+            SCREEN_WIDTH / 2,
+            300,
+            arcade.color.RED_PURPLE,
+            40,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            "Press R to Restart",
+            SCREEN_WIDTH / 2,
+            250,
+            arcade.color.WHITE,
+            20,
+            anchor_x="center"
+        )
+
+    def on_draw(self):
+        self.clear()
+
+        if not self.game_started:
+            self.draw_main_menu()
+            return
+
+        self.draw_game_objects()
+        self.draw_game_ui()
+        self.draw_power_up_bars()
+
+        # Pause menu
+        if self.paused:
+            self.draw_pause_menu()
 
         # Display wave completion message
         if self.wave_complete and not self.game_over:
-            arcade.draw_text(
-                f"Wave {self.wave} Complete!",
-                250,
-                300,
-                arcade.color.YELLOW,
-                30
-            )
+            self.draw_wave_complete()
 
         # Game over screen
         if self.game_over:
-            arcade.draw_text("GAME OVER",SCREEN_WIDTH/2,300,arcade.color.RED_PURPLE,40,anchor_x="center")
-            arcade.draw_text("Press R to Restart",SCREEN_WIDTH/2,250,arcade.color.WHITE,20,anchor_x="center")
+            self.draw_game_over()
 
-    def on_update(self, delta_time):
-
-        # Stop updates when the game is inactive
-        if self.game_over or not self.game_started or self.paused:
-            return
+    def update_timers(self,delta_time):
 
         # Update invincibility timer
-        if self.invincibility_timer>0:
+        if self.invincibility_timer > 0:
             self.invincibility_timer -= delta_time
 
             # Blink player
             self.player.visible = int(self.invincibility_timer * 10) % 2 == 0
 
-            if self.invincibility_timer<=0:
-                self.invincible=False
+            if self.invincibility_timer <= 0:
+                self.invincible = False
                 self.player.visible = True
 
         # Update shooting cooldown
-        if self.shoot_timer>0:
+        if self.shoot_timer > 0:
             self.shoot_timer -= delta_time
 
         # Shield Time Management
@@ -286,6 +389,8 @@ class Game(arcade.Window):
             if self.player.rapid_fire_timer <= 0:
                 self.player.rapid_fire_active = False
                 self.player.rapid_fire_timer = 0
+
+    def update_player(self, delta_time):
 
         # Reset movement
         self.player.change_x = 0
@@ -311,18 +416,20 @@ class Game(arcade.Window):
         # Keep player inside the screen
         self.player.keep_inside_screen()
 
+    def update_enemies(self, delta_time):
+
         # Move enemies toward the player
         for enemy in self.enemy_list:
             enemy.move_toward_player(self.player, delta_time)
 
             # Handle enemy-player collision
-            if arcade.check_for_collision(enemy,self.player):
+            if arcade.check_for_collision(enemy, self.player):
                 if self.player.shield_active:
                     enemy.remove_from_sprite_lists()
                     self.create_enemy()
 
                 elif not self.invincible:
-                    self.player.health = max( 0,self.player.health - enemy.damage  )
+                    self.player.health = max(0, self.player.health - enemy.damage)
 
                     # Tank knockback
                     if isinstance(enemy, TankEnemy):
@@ -331,8 +438,8 @@ class Game(arcade.Window):
                         distance = (dx ** 2 + dy ** 2) ** 0.5
 
                         if distance > 0:
-                            self.player.center_x += ( dx / distance * enemy.knockback )
-                            self.player.center_y += ( dy / distance * enemy.knockback )
+                            self.player.center_x += (dx / distance * enemy.knockback)
+                            self.player.center_y += (dy / distance * enemy.knockback)
                             self.player.keep_inside_screen()
 
                     self.invincible = True
@@ -353,6 +460,8 @@ class Game(arcade.Window):
                 enemy.avoid_enemy(other, delta_time)
                 other.avoid_enemy(enemy, delta_time)
 
+    def update_bullets(self, delta_time):
+
         # Move bullets
         for bullet in self.bullet_list:
             bullet.center_y += bullet.speed * delta_time
@@ -365,26 +474,26 @@ class Game(arcade.Window):
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             if hit_list:
                 for enemy in hit_list:
-                    enemy.health-=BULLET_DAMAGE
+                    enemy.health -= BULLET_DAMAGE
                     bullet.remove_from_sprite_lists()
 
-                    if enemy.health<=0:
+                    if enemy.health <= 0:
                         # Update score and kill count
                         self.score += enemy.score
-                        self.kills+=1
+                        self.kills += 1
 
                         # Spawn a  power-up with a 20% chance
                         if random.random() < 0.2:
-                            power_up_type=random.choice([HealthPowerUp,RapidFirePowerUp,ShieldPowerUp])
+                            power_up_type = random.choice([HealthPowerUp, RapidFirePowerUp, ShieldPowerUp])
                             power_up = power_up_type()
                             power_up.center_x = enemy.center_x
                             power_up.center_y = enemy.center_y
                             self.power_up_list.append(power_up)
 
                         # Create explosion effect
-                        explosion=Explosion(enemy.center_x,enemy.center_y)
+                        explosion = Explosion(enemy.center_x, enemy.center_y)
 
-                        for i in range(PARTICLE_COUNT): # Create Particle
+                        for i in range(PARTICLE_COUNT):  # Create Particle
                             particle = Particle(
                                 enemy.center_x,
                                 enemy.center_y
@@ -393,6 +502,8 @@ class Game(arcade.Window):
 
                         self.explosion_list.append(explosion)
                         enemy.remove_from_sprite_lists()
+
+    def update_effects(self, delta_time):
 
         # Update explosions
         for explosion in self.explosion_list[:]:
@@ -405,6 +516,8 @@ class Game(arcade.Window):
 
             if should_remove:
                 self.particles.remove(particle)
+
+    def update_power_ups(self,delta_time):
 
         # Move power-ups downward.
         for power_up in self.power_up_list:
@@ -420,6 +533,8 @@ class Game(arcade.Window):
                 power_up.collect(self.player)
                 power_up.remove_from_sprite_lists()
 
+    def update_wave(self,delta_time):
+
         # Check if the current wave is complete
         if len(self.enemy_list)==0:
             self.wave_complete=True
@@ -429,6 +544,20 @@ class Game(arcade.Window):
                 self.next_wave()
                 self.wave_timer=0
                 self.wave_complete = False
+
+    def on_update(self, delta_time):
+
+        # Stop updates when the game is inactive
+        if self.game_over or not self.game_started or self.paused:
+            return
+
+        self.update_timers(delta_time)
+        self.update_player(delta_time)
+        self.update_enemies(delta_time)
+        self.update_bullets(delta_time)
+        self.update_effects(delta_time)
+        self.update_power_ups(delta_time)
+        self.update_wave(delta_time)
 
     def on_key_press(self, key, modifiers):
 
