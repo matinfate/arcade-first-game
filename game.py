@@ -629,7 +629,8 @@ class Game(arcade.Window):
             enemy = TankEnemy()
 
         # Set a safe spawn position away from the player.
-        while True:
+        max_attempts = 100
+        for _ in range(max_attempts):
             enemy.center_x = random.randint(50, SCREEN_WIDTH - 50)
             enemy.center_y = random.randint(350, SCREEN_HEIGHT - 50)
 
