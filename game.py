@@ -473,35 +473,35 @@ class Game(arcade.Window):
             # Check bullet collision with enemies
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             if hit_list:
-                for enemy in hit_list:
-                    enemy.health -= BULLET_DAMAGE
-                    bullet.remove_from_sprite_lists()
+                enemy = hit_list[0]
+                enemy.health -= BULLET_DAMAGE
+                bullet.remove_from_sprite_lists()
 
-                    if enemy.health <= 0:
-                        # Update score and kill count
-                        self.score += enemy.score
-                        self.kills += 1
+                if enemy.health <= 0:
+                    # Update score and kill count
+                    self.score += enemy.score
+                    self.kills += 1
 
-                        # Spawn a  power-up with a 20% chance
-                        if random.random() < 0.2:
-                            power_up_type = random.choice([HealthPowerUp, RapidFirePowerUp, ShieldPowerUp])
-                            power_up = power_up_type()
-                            power_up.center_x = enemy.center_x
-                            power_up.center_y = enemy.center_y
-                            self.power_up_list.append(power_up)
+                    # Spawn a  power-up with a 20% chance
+                    if random.random() < 0.2:
+                        power_up_type = random.choice([HealthPowerUp, RapidFirePowerUp, ShieldPowerUp])
+                        power_up = power_up_type()
+                        power_up.center_x = enemy.center_x
+                        power_up.center_y = enemy.center_y
+                        self.power_up_list.append(power_up)
 
-                        # Create explosion effect
-                        explosion = Explosion(enemy.center_x, enemy.center_y)
+                    # Create explosion effect
+                    explosion = Explosion(enemy.center_x, enemy.center_y)
 
-                        for i in range(PARTICLE_COUNT):  # Create Particle
-                            particle = Particle(
-                                enemy.center_x,
-                                enemy.center_y
-                            )
-                            self.particles.append(particle)
+                    for i in range(PARTICLE_COUNT):  # Create Particle
+                        particle = Particle(
+                            enemy.center_x,
+                            enemy.center_y
+                        )
+                        self.particles.append(particle)
 
-                        self.explosion_list.append(explosion)
-                        enemy.remove_from_sprite_lists()
+                    self.explosion_list.append(explosion)
+                    enemy.remove_from_sprite_lists()
 
     def update_effects(self, delta_time):
 
