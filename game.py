@@ -653,7 +653,8 @@ class Game(arcade.Window):
 
     # Reset the game state
     def restart_game(self):
-        self.player.health = PLAYER_HEALTH
+
+        self.player.reset()
         self.score = 0
         self.kills = 0
 
@@ -662,25 +663,14 @@ class Game(arcade.Window):
 
         self.invincible = False
 
-        self.player.shield_active = False
-        self.player.shield_timer = 0
-
-        self.player.rapid_fire_active = False
-        self.player.rapid_fire_timer = 0
-
         self.game_over = False
         self.paused = False
 
         self.wave_complete = False
         self.wave_timer = 0
 
-        self.player.visible = True
-
         self.wave = 1
         self.enemy_count = 5
-
-        self.player.center_x = self.player.start_x
-        self.player.center_y = self.player.start_y
 
         self.bullet_list.clear()
         self.enemy_list.clear()

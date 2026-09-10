@@ -48,7 +48,6 @@ class Player(arcade.Sprite):
         self.rapid_fire_active = False
         self.rapid_fire_timer = 0
 
-    # keep player inside screen
     def keep_inside_screen(self):
         if self.left < 0:
             self.left = 0
@@ -69,3 +68,17 @@ class Player(arcade.Sprite):
     def activate_rapid_fire(self, duration):
         self.rapid_fire_active = True
         self.rapid_fire_timer = duration
+
+    def reset(self):
+        self.health = PLAYER_HEALTH
+
+        self.shield_active = False
+        self.shield_timer = 0
+
+        self.rapid_fire_active = False
+        self.rapid_fire_timer = 0
+
+        self.center_x = self.start_x
+        self.center_y = self.start_y
+
+        self.visible=True
