@@ -651,6 +651,12 @@ class Game(arcade.Window):
         for i in range(self.enemy_count):
             self.create_enemy()
 
+    def reset_wave(self):
+        self.wave = 1
+        self.enemy_count = 5
+        self.wave_complete = False
+        self.wave_timer = 0
+
     # Reset the game state
     def restart_game(self):
 
@@ -666,11 +672,7 @@ class Game(arcade.Window):
         self.game_over = False
         self.paused = False
 
-        self.wave_complete = False
-        self.wave_timer = 0
-
-        self.wave = 1
-        self.enemy_count = 5
+        self.reset_wave()
 
         self.bullet_list.clear()
         self.enemy_list.clear()
