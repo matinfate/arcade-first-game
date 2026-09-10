@@ -630,6 +630,8 @@ class Game(arcade.Window):
 
         # Set a safe spawn position away from the player.
         max_attempts = 100
+        spawned_safely = False
+
         for _ in range(max_attempts):
             enemy.center_x = random.randint(50, SCREEN_WIDTH - 50)
             enemy.center_y = random.randint(350, SCREEN_HEIGHT - 50)
@@ -639,7 +641,12 @@ class Game(arcade.Window):
             distance=(dx ** 2 + dy ** 2) ** 0.5
 
             if distance >= 150:
+                spawned_safely = True
                 break
+
+        if not spawned_safely:
+            enemy.center_x = SCREEN_WIDTH - 50
+            enemy.center_y = SCREEN_HEIGHT - 50
 
         self.enemy_list.append(enemy)
 
