@@ -468,12 +468,13 @@ class Game(arcade.Window):
             # Remove bullets that leave the screen
             if bullet.bottom > self.height:
                 bullet.remove_from_sprite_lists()
+                continue
 
             # Check bullet collision with enemies
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             if hit_list:
                 enemy = hit_list[0]
-                enemy.health -= BULLET_DAMAGE
+                enemy.health -= bullet.damage
                 bullet.remove_from_sprite_lists()
 
                 if enemy.health <= 0:
