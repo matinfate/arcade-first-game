@@ -1,134 +1,125 @@
-# 🎮 My First Arcade Game
+# Arcade First Game 🎮
 
-My first 2D arcade shooter game built with Python and the Arcade library.
+A 2D arcade shooter game built with **Python** and the **Arcade** library.
 
-I'm developing this project step-by-step while learning Python,
-game development, object-oriented programming, and software architecture.
+This project is my first game development project and is focused on learning Python, Object-Oriented Programming (OOP), game architecture, collision systems, enemy behavior, power-ups, and game-state management.
 
-## 🛠️ Technologies
+## Features
 
-* Python
-* Arcade
-* PyCharm
-* Git & GitHub
+* 🎮 Start menu and game states
+* 🕹️ WASD player movement
+* 🔫 Shooting system with bullets
+* ⏱️ Shooting cooldown
+* ⚡ Rapid Fire power-up
+* 🛡️ Shield power-up
+* ❤️ Health power-up
+* 👾 Multiple enemy types
+* ⚡ Fast Enemy with zigzag movement
+* 🛡️ Tank Enemy with high health and knockback
+* ❤️ Player health system
+* ❤️ Enemy health bars
+* 💥 Explosion effects
+* ✨ Particle effects
+* 🏆 Score system
+* ☠️ Kill counter
+* 🌊 Wave-based enemy spawning
+* 📈 Increasing wave difficulty
+* 🛡️ Player invincibility after taking damage
+* 👾 Enemy collision avoidance
+* 🎯 Safe enemy spawning away from the player
+* ⏸️ Pause and resume system
+* 💀 Game Over screen
+* 🔄 Game restart system
+* 🧩 Object-Oriented game structure
+* ⚙️ Centralized game settings
 
-## 🎮 Current Features
+## Enemy System
 
-* [x] Start Menu
-* [x] Player Movement
-* [x] Enemy Movement
-* [x] Multiple Enemy Types
-* [x] Random Enemy Spawning
-* [x] Enemy Respawning
-* [x] Enemy Waves
-* [x] Increasing Enemy Difficulty
-* [x] Player Health System
-* [x] Enemy Health System
-* [x] Enemy Damage
-* [x] Bullet System
-* [x] Bullet-Enemy Collision
-* [x] Collision Detection
-* [x] Score System
-* [x] Kill Counter
-* [x] Game Over System
-* [x] Restart System
-* [x] Player Position Reset on Restart
-* [x] Player Invincibility After Taking Damage
-* [x] Player Invincibility Blinking
-* [x] Enemy Health Bars
-* [x] Player Health Bar
-* [x] Explosion Effects
-* [x] Particle Effects
-* [x] Random Particle Colors
-* [x] Shooting Cooldown
-* [x] Pause System
-* [x] Pause Menu
-* [x] Resume with ESC
-* [x] Health Power-Up
-* [x] Shield Power-Up
-* [x] Rapid Fire Power-Up
-* [x] Power-Up Falling System
-* [x] Power-Up Collision and Collection
-* [x] Power-Up Duration Timers
-* [x] Power-Up Status UI
-* [x] Shield Visual Effect
-* [x] Rapid Fire Shooting Effect
-* [x] Fast Enemy Zigzag Movement
-* [x] Tank Enemy Knockback
-* [x] Optimized Enemy Collision Checks
-* [x] Power-Up Texture Preloading
+The game currently contains three enemy types:
 
-## 👾 Enemy Types
+### Normal Enemy
 
-The game currently includes three different enemy types:
+* Balanced speed and health
+* Score: 10
+* Damage: 10
 
-* **Normal Enemy** — Balanced speed, health, and damage
-* **Fast Enemy** — Faster movement, lower health, and zigzag movement
-* **Tank Enemy** — High health and damage, slower movement, and knockback effect
+### Fast Enemy
 
-Enemy types are randomly selected, and their appearance becomes more difficult as the wave increases.
+* Higher movement speed
+* Lower health
+* Zigzag movement behavior
+* Score: 20
+* Damage: 15
 
-## ⚡ Power-Ups
+### Tank Enemy
 
-The game currently includes three different power-ups:
+* Lower movement speed
+* High health
+* Higher damage
+* Knockback effect when attacking the player
+* Score: 30
+* Damage: 25
 
-* **Health Power-Up** — Restores player health
-* **Shield Power-Up** — Protects the player from enemy damage for a limited time
-* **Rapid Fire Power-Up** — Temporarily increases the player's shooting speed
+Enemy properties such as speed, health, score, damage, and tank knockback are centralized in `settings.py`.
 
-Power-ups fall from defeated enemies and can be collected by the player.
+## Bullet System
 
-Active power-ups display a progress bar showing their remaining duration.
+The bullet system includes:
 
-Power-up textures are preloaded to prevent lag when a power-up appears for the first time.
+* Configurable bullet speed
+* Configurable bullet scale
+* Configurable bullet damage
+* Automatic removal when bullets leave the screen
+* Collision detection between bullets and enemies
+* One bullet can damage only one enemy
 
-## 📚 What I've Learned
+Bullet-specific behavior is encapsulated inside the `Bullet` class.
 
-* [x] Arcade Window
-* [x] `super()`
-* [x] `on_draw()`
-* [x] `on_update()`
-* [x] Keyboard Input
-* [x] Sprite
-* [x] SpriteList
-* [x] Object-Oriented Programming
-* [x] Inheritance
-* [x] Polymorphism
-* [x] Collision Detection
-* [x] Game State Management
-* [x] Delta Time
-* [x] Timers and Cooldowns
-* [x] Health Systems
-* [x] Power-Up Systems
-* [x] Game Over and Restart Logic
-* [x] Wave Systems
-* [x] Randomized Gameplay
-* [x] Enemy AI and Movement Behaviors
-* [x] Knockback Mechanics
-* [x] Particle Effects
-* [x] Basic Game UI
-* [x] Performance Optimization
-* [x] Code Refactoring
-* [x] Separating Game Components into Multiple Files
-* [x] Managing Game Settings with Constants
-* [x] Git & GitHub Workflow
+## Power-Up System
 
-## 🚧 Currently Working On
+Enemies have a chance to drop a power-up when defeated.
 
-* Improving gameplay and balancing
-* Adding new gameplay mechanics
-* Improving enemy behavior
-* Improving visual effects
-* Optimizing the game
-* Expanding the game UI
+Current power-ups:
 
-## 📁 Project Structure
+### Health Power-Up ❤️
+
+Restores player health.
+
+### Shield Power-Up 🛡️
+
+Temporarily protects the player from enemy damage.
+
+### Rapid Fire Power-Up ⚡
+
+Temporarily increases the player's firing speed.
+
+Power-up textures are preloaded to prevent a delay when a power-up appears for the first time.
+
+## Wave System
+
+The game uses a wave-based progression system.
+
+* The first wave starts with 5 enemies.
+* Each completed wave increases the number of enemies.
+* Enemy type probabilities change as the wave number increases.
+* Fast and Tank enemies become more common in later waves.
+* A short delay occurs between completed waves.
+
+## Game States
+
+The game currently supports:
+
+* Main Menu
+* Playing
+* Paused
+* Wave Complete
+* Game Over
+* Restart
+
+## Project Structure
 
 ```text
 arcade-first-game/
-│
-├── assets/
-│   └── image/
 │
 ├── main.py
 ├── game.py
@@ -139,13 +130,58 @@ arcade-first-game/
 ├── particle.py
 ├── power_up.py
 ├── settings.py
-└── README.md
+├── README.md
+│
+└── assets/
+    └── image/
+        ├── player.png
+        ├── enemy.png
+        ├── fast_enemy.png
+        ├── tank_enemy.png
+        ├── bullet.png
+        ├── health_powerup.png
+        ├── shield_powerup.png
+        └── rapid_fire_powerup.png
 ```
 
-## 🎯 Goal
+## Controls
 
-Build a complete 2D arcade shooter while improving my
-Python, object-oriented programming, and game development skills.
+| Key   | Action                  |
+| ----- | ----------------------- |
+| W     | Move Up                 |
+| S     | Move Down               |
+| A     | Move Left               |
+| D     | Move Right              |
+| SPACE | Shoot                   |
+| ESC   | Pause / Resume          |
+| R     | Restart after Game Over |
 
-This project is also a way for me to learn how to structure,
-develop, debug, optimize, and maintain a real software project step-by-step.
+## Technologies
+
+* **Python**
+* **Arcade**
+* **Object-Oriented Programming**
+* **Git**
+* **GitHub**
+* **PyCharm**
+
+## Project Goal
+
+The main goal of this project is to learn the fundamentals of game development while improving my Python and OOP skills through a practical project.
+
+The project is being developed incrementally, with a focus on clean architecture, reusable classes, centralized configuration, and gradually improving game systems.
+
+## Future Plans
+
+Possible future improvements include:
+
+* More enemy types
+* More weapons
+* Additional power-ups
+* Boss enemies
+* Sound effects and background music
+* Improved animations
+* More advanced enemy AI
+* Better menus and UI
+* Additional levels and game modes
+* Further code refactoring and optimization
