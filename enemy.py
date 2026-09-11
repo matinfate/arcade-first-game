@@ -1,6 +1,21 @@
 import arcade
 import random
-from settings import ENEMY_SPEED,ENEMY_HEALTH
+
+from settings import (
+    ENEMY_SPEED,
+    ENEMY_HEALTH,
+    ENEMY_SCORE,
+    ENEMY_DAMAGE,
+    FAST_ENEMY_SPEED,
+    FAST_ENEMY_HEALTH,
+    FAST_ENEMY_SCORE,
+    FAST_ENEMY_DAMAGE,
+    TANK_ENEMY_SPEED,
+    TANK_ENEMY_HEALTH,
+    TANK_ENEMY_SCORE,
+    TANK_ENEMY_DAMAGE,
+    TANK_ENEMY_KNOCKBACK
+)
 
 class Enemy(arcade.Sprite):
 
@@ -10,12 +25,12 @@ class Enemy(arcade.Sprite):
         self.scale = 0.2
         self.speed = ENEMY_SPEED
 
-        self.score = 10
+        self.score = ENEMY_SCORE
 
         self.max_health = ENEMY_HEALTH
         self.health = self.max_health
 
-        self.damage = 10
+        self.damage = ENEMY_DAMAGE
 
         self.center_x = random.randint(50, 750)
         self.center_y = random.randint(400, 550)
@@ -77,11 +92,11 @@ class FastEnemy(Enemy):
         super().__init__("assets/image/fast_enemy.png")
 
         self.scale = 0.1
-        self.speed = 100
-        self.max_health = 20
+        self.speed = FAST_ENEMY_SPEED
+        self.max_health = FAST_ENEMY_HEALTH
         self.health = self.max_health
-        self.score = 20
-        self.damage = 15
+        self.score = FAST_ENEMY_SCORE
+        self.damage = FAST_ENEMY_DAMAGE
 
         self.zigzag_timer = 0
         self.zigzag_direction = 1
@@ -107,10 +122,10 @@ class TankEnemy(Enemy):
         super().__init__("assets/image/tank_enemy.png")
 
         self.scale = 0.5
-        self.speed = 30
-        self.max_health = 50
+        self.speed = TANK_ENEMY_SPEED
+        self.max_health = TANK_ENEMY_HEALTH
         self.health = self.max_health
-        self.score = 30
-        self.damage = 25
+        self.score = TANK_ENEMY_SCORE
+        self.damage = TANK_ENEMY_DAMAGE
 
-        self.knockback = 150
+        self.knockback = TANK_ENEMY_KNOCKBACK
