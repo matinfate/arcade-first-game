@@ -38,7 +38,8 @@ class Player(arcade.Sprite):
         self.right_pressed = False
 
         # Create a Health for player
-        self.health = PLAYER_HEALTH
+        self.max_health = PLAYER_HEALTH
+        self.health = self.max_health
 
         # Create a Shield for player
         self.shield_active = False
@@ -70,7 +71,7 @@ class Player(arcade.Sprite):
         self.rapid_fire_timer = duration
 
     def reset(self):
-        self.health = PLAYER_HEALTH
+        self.health = self.max_health
 
         self.shield_active = False
         self.shield_timer = 0

@@ -14,7 +14,6 @@ from settings import (
     SCREEN_TITLE,
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
-    PLAYER_HEALTH,
     BULLET_DAMAGE,
     PARTICLE_COUNT
 )
@@ -172,7 +171,7 @@ class Game(arcade.Window):
         )
 
         # Draw player health bar
-        max_health = PLAYER_HEALTH
+        max_health = self.player.max_health
         health_x = 110
         health_width = 200
         health_height = 20
