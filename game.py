@@ -14,7 +14,6 @@ from settings import (
     SCREEN_TITLE,
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
-    BULLET_DAMAGE,
     PARTICLE_COUNT
 )
 
