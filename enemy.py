@@ -11,6 +11,7 @@ from settings import (
     FAST_ENEMY_SCORE,
     FAST_ENEMY_DAMAGE,
     FAST_ENEMY_ZIGZAG_SPEED,
+    FAST_ENEMY_ZIGZAG_INTERVAL,
     TANK_ENEMY_SPEED,
     TANK_ENEMY_HEALTH,
     TANK_ENEMY_SCORE,
@@ -110,7 +111,7 @@ class FastEnemy(Enemy):
         self.zigzag_timer += delta_time
 
         # Change direction every 0.4 seconds
-        if self.zigzag_timer >= 0.4:
+        if self.zigzag_timer >= FAST_ENEMY_ZIGZAG_INTERVAL:
             self.zigzag_timer = 0
             self.zigzag_direction *= -1
 
