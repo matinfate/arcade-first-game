@@ -53,7 +53,7 @@ class Enemy(arcade.Sprite):
         health_width = 40
         health_height = 5
 
-        health_ratio = self.health / self.max_health
+        health_ratio = max(0, min(1, self.health / self.max_health))
 
         current_width = health_width * health_ratio
 
