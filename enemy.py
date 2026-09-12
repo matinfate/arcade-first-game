@@ -6,6 +6,7 @@ from settings import (
     ENEMY_HEALTH,
     ENEMY_SCORE,
     ENEMY_DAMAGE,
+    ENEMY_AVOID_SPEED,
     FAST_ENEMY_SPEED,
     FAST_ENEMY_HEALTH,
     FAST_ENEMY_SCORE,
@@ -79,14 +80,14 @@ class Enemy(arcade.Sprite):
     def avoid_enemy(self,other,delta_time):
         if arcade.check_for_collision(self, other):
             if self.center_x < other.center_x:
-                self.center_x -= self.speed*delta_time
+                self.center_x -= ENEMY_AVOID_SPEED*delta_time
             elif self.center_x > other.center_x:
-                self.center_x += self.speed*delta_time
+                self.center_x += ENEMY_AVOID_SPEED*delta_time
 
             if self.center_y < other.center_y:
-                self.center_y -= self.speed*delta_time
+                self.center_y -= ENEMY_AVOID_SPEED*delta_time
             elif self.center_y > other.center_y:
-                self.center_y += self.speed*delta_time
+                self.center_y += ENEMY_AVOID_SPEED*delta_time
 
 class FastEnemy(Enemy):
 
