@@ -15,6 +15,8 @@ from settings import (
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
     ENEMY_MIN_SPAWN_DISTANCE,
+    NORMAL_ENEMY_BASE_CHANCE,
+    FAST_ENEMY_BASE_CHANCE,
     PARTICLE_COUNT
 )
 
@@ -614,8 +616,8 @@ class Game(arcade.Window):
     # Create a random enemy type
     def create_enemy(self):
 
-        normal_chance = max(50, 70 - (self.wave - 1) * 5)
-        fast_chance = min(25, 15 + (self.wave - 1) * 2)
+        normal_chance = max(50, NORMAL_ENEMY_BASE_CHANCE - (self.wave - 1) * 5)
+        fast_chance = min(25, FAST_ENEMY_BASE_CHANCE + (self.wave - 1) * 2)
 
         enemy_type = random.randint(1, 100)
 
