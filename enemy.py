@@ -10,6 +10,7 @@ from settings import (
     FAST_ENEMY_HEALTH,
     FAST_ENEMY_SCORE,
     FAST_ENEMY_DAMAGE,
+    FAST_ENEMY_ZIGZAG_SPEED,
     TANK_ENEMY_SPEED,
     TANK_ENEMY_HEALTH,
     TANK_ENEMY_SCORE,
@@ -114,7 +115,7 @@ class FastEnemy(Enemy):
             self.zigzag_direction *= -1
 
         # Add horizontal zigzag movement
-        self.center_x += (50 * self.zigzag_direction * delta_time)
+        self.center_x += (FAST_ENEMY_ZIGZAG_SPEED * self.zigzag_direction * delta_time)
 
 class TankEnemy(Enemy):
 
