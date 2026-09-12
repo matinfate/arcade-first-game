@@ -14,6 +14,7 @@ from settings import (
     SCREEN_TITLE,
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
+    ENEMY_MIN_SPAWN_DISTANCE,
     PARTICLE_COUNT
 )
 
@@ -639,7 +640,7 @@ class Game(arcade.Window):
             dy=enemy.center_y - self.player.center_y
             distance=(dx ** 2 + dy ** 2) ** 0.5
 
-            if distance >= 150:
+            if distance >= ENEMY_MIN_SPAWN_DISTANCE:
                 spawned_safely = True
                 break
 
