@@ -15,10 +15,11 @@ from settings import (
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
     ENEMY_MIN_SPAWN_DISTANCE,
-    STARTING_ENEMY_COUNT,
-    ENEMIES_ADDED_PER_WAVE,
     NORMAL_ENEMY_BASE_CHANCE,
     FAST_ENEMY_BASE_CHANCE,
+    STARTING_ENEMY_COUNT,
+    ENEMIES_ADDED_PER_WAVE,
+    WAVE_DELAY,
     PARTICLE_COUNT
 )
 
@@ -44,7 +45,7 @@ class Game(arcade.Window):
         self.enemy_count = STARTING_ENEMY_COUNT
 
         # Wave transition timer
-        self.wave_delay = 2.0
+        self.wave_delay = WAVE_DELAY
         self.wave_timer = 0
         self.wave_complete = False
 
