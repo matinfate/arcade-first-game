@@ -15,6 +15,7 @@ from settings import (
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
     ENEMY_MIN_SPAWN_DISTANCE,
+    ENEMY_SPAWN_MAX_ATTEMPTS,
     NORMAL_ENEMY_BASE_CHANCE,
     FAST_ENEMY_BASE_CHANCE,
     STARTING_ENEMY_COUNT,
@@ -26,17 +27,18 @@ from settings import (
 class Game(arcade.Window):
 
     def __init__(self):
-        super().__init__(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_TITLE)
-
+        super().__init__(
+            SCREEN_WIDTH,
+            SCREEN_HEIGHT,
+            SCREEN_TITLE,
+            center_window=True
+        )
 
         self.player = Player()
 
-
         self.player_list = arcade.SpriteList() # SpriteList is a specialized Arcade list for storing sprites.
 
-
         self.player_list.append(self.player)
-
 
         self.enemy_list = arcade.SpriteList()
 
@@ -634,7 +636,7 @@ class Game(arcade.Window):
             enemy = TankEnemy()
 
         # Set a safe spawn position away from the player.
-        max_attempts = 100
+        max_attempts = ENEMY_SPAWN_MAX_ATTEMPTS
         spawned_safely = False
 
         for _ in range(max_attempts):
