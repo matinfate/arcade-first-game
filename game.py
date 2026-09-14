@@ -314,12 +314,33 @@ class Game(arcade.Window):
 
     def draw_wave_complete(self):
 
+        remaining_time = max(0, self.wave_delay - self.wave_timer)
+
         arcade.draw_text(
-            f"Wave {self.wave} Complete!",
-            250,
-            300,
+            f"WAVE {self.wave} COMPLETE!",
+            SCREEN_WIDTH / 2,
+            350,
             arcade.color.YELLOW,
-            30
+            26,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            "NEXT WAVE",
+            SCREEN_WIDTH / 2,
+            305,
+            arcade.color.WHITE,
+            18,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            f"{remaining_time:.1f}",
+            SCREEN_WIDTH / 2,
+            250,
+            arcade.color.YELLOW,
+            42,
+            anchor_x="center"
         )
 
     def draw_game_over(self):
