@@ -39,7 +39,6 @@ STARTING_ENEMY_COUNT = 5
 ENEMIES_ADDED_PER_WAVE = 2
 WAVE_DELAY = 2.0
 
-
 # Bullet settings
 BULLET_SPEED = 500
 BULLET_SCALE = 0.2
@@ -47,6 +46,10 @@ BULLET_DAMAGE = 10
 
 # Shooting settings
 SHOOT_COOLDOWN = 0.25
+
+# Power-up settings
+SHIELD_DURATION = 5.0
+RAPID_FIRE_DURATION = 5.0
 
 # Damage settings
 INVINCIBILITY_TIME = 1.0

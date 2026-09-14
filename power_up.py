@@ -1,6 +1,6 @@
 import arcade
 
-from settings import PLAYER_HEALTH
+from settings import PLAYER_HEALTH,SHIELD_DURATION, RAPID_FIRE_DURATION
 
 HEALTH_POWERUP_TEXTURE = arcade.load_texture(
     "assets/image/health_powerup.png"
@@ -43,7 +43,7 @@ class ShieldPowerUp(PowerUp):
     def __init__(self):
         super().__init__(SHIELD_POWERUP_TEXTURE)
 
-        self.duration = 5.0
+        self.duration = SHIELD_DURATION
 
     def collect(self, player):
         player.activate_shield(self.duration)
@@ -53,7 +53,7 @@ class RapidFirePowerUp(PowerUp):
     def __init__(self):
         super().__init__(RAPID_FIRE_POWERUP_TEXTURE)
 
-        self.duration = 5.0
+        self.duration = RAPID_FIRE_DURATION
 
     def collect(self, player):
         player.activate_rapid_fire(self.duration)

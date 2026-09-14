@@ -21,6 +21,8 @@ from settings import (
     STARTING_ENEMY_COUNT,
     ENEMIES_ADDED_PER_WAVE,
     WAVE_DELAY,
+    SHIELD_DURATION,
+    RAPID_FIRE_DURATION,
     PARTICLE_COUNT
 )
 
@@ -222,7 +224,7 @@ class Game(arcade.Window):
 
         # Shield Bar
         if self.player.shield_active:
-            max_duration = 5.0
+            max_duration = SHIELD_DURATION
             ratio = max(0, self.player.shield_timer / max_duration)
             current_width = bar_width * ratio
 
@@ -257,7 +259,7 @@ class Game(arcade.Window):
 
         # Rapid Fire Bar
         if self.player.rapid_fire_active:
-            max_duration = 5.0
+            max_duration = RAPID_FIRE_DURATION
             ratio = max(0, self.player.rapid_fire_timer / max_duration)
             current_width = bar_width * ratio
 
