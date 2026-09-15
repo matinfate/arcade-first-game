@@ -7,6 +7,7 @@ from bullet import Bullet
 from explosion import Explosion
 from particle import Particle
 from power_up import HealthPowerUp, ShieldPowerUp, RapidFirePowerUp
+from sound_manager import SoundManager
 
 from settings import (
     SCREEN_WIDTH,
@@ -37,10 +38,10 @@ class Game(arcade.Window):
         )
 
         self.player = Player()
-
         self.player_list = arcade.SpriteList() # SpriteList is a specialized Arcade list for storing sprites.
-
         self.player_list.append(self.player)
+
+        self.sound_manager = SoundManager()
 
         self.enemy_list = arcade.SpriteList()
 
@@ -613,6 +614,7 @@ class Game(arcade.Window):
             bullet = Bullet(self.player.center_x, self.player.top)
 
             self.bullet_list.append(bullet)
+            self.sound_manager.play_shoot()
 
             if self.player.rapid_fire_active:
                 self.shoot_timer = self.shoot_cooldown / 3
