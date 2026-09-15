@@ -163,7 +163,7 @@ class Game(arcade.Window):
 
         # Display score
         arcade.draw_text(
-            f"Score: {self.score}",
+            f"SCORE: {self.score}",
             10,
             570,
             arcade.color.WHITE,
@@ -172,9 +172,9 @@ class Game(arcade.Window):
 
         # Display kill count
         arcade.draw_text(
-            f"Kills: {self.kills}",
+            f"KILLS: {self.kills}",
             10,
-            500,
+            540,
             arcade.color.WHITE,
             20
         )
@@ -211,7 +211,7 @@ class Game(arcade.Window):
         arcade.draw_text(
             f"WAVE {self.wave}",
             10,
-            530,
+            510,
             arcade.color.YELLOW,
             20
         )
