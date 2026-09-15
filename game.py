@@ -209,10 +209,10 @@ class Game(arcade.Window):
 
         # Display current wave
         arcade.draw_text(
-            f"Wave:{self.wave}",
+            f"WAVE {self.wave}",
             10,
             530,
-            arcade.color.DARK_RED,
+            arcade.color.YELLOW,
             20
         )
 
