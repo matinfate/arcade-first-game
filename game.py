@@ -509,9 +509,10 @@ class Game(arcade.Window):
                 bullet.remove_from_sprite_lists()
 
                 if enemy.health <= 0:
-                    # Update score and kill count
+                    # Update score and kill count and play sound effect
                     self.score += enemy.score
                     self.kills += 1
+                    self.sound_manager.play_enemy_death()
 
                     # Spawn a  power-up with a 20% chance
                     if random.random() < 0.2:
