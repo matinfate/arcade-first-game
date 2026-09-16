@@ -688,7 +688,7 @@ class Game(arcade.Window):
     # Start the next wave
     def next_wave(self):
         self.wave += 1
-
+        self.sound_manager.play_wave_start()
         self.enemy_count += ENEMIES_ADDED_PER_WAVE
 
         for i in range(self.enemy_count):
