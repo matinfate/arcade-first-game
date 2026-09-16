@@ -460,6 +460,7 @@ class Game(arcade.Window):
 
                 elif not self.invincible:
                     self.player.health = max(0, self.player.health - enemy.damage)
+                    self.sound_manager.play_player_hit()
 
                     # Tank knockback
                     if isinstance(enemy, TankEnemy):
