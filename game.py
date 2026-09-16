@@ -481,6 +481,7 @@ class Game(arcade.Window):
 
                     if self.player.health <= 0:
                         self.game_over = True
+                        self.sound_manager.play_game_over()
 
         # Prevent enemies from overlapping each other.
         for i in range(len(self.enemy_list)):
