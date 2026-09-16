@@ -6,11 +6,13 @@ class SoundManager:
 
         self.shoot_sound= arcade.load_sound("assets/sound/shoot.wav")
         self.enemy_death_sound= arcade.load_sound("assets/sound/enemy_death.wav")
+        self.power_up_sound= arcade.load_sound("assets/sound/power_up.wav")
 
     def play_shoot(self):
-
         arcade.play_sound(self.shoot_sound)
 
     def play_enemy_death(self):
-
         arcade.play_sound(self.enemy_death_sound)
+
+    def play_power_up(self):
+        arcade.play_sound(self.power_up_sound)

@@ -563,6 +563,7 @@ class Game(arcade.Window):
             # Check collision with player
             if arcade.check_for_collision(power_up, self.player):
                 power_up.collect(self.player)
+                self.sound_manager.play_power_up()
                 power_up.remove_from_sprite_lists()
 
     def update_wave(self,delta_time):
