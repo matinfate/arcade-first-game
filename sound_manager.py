@@ -3,13 +3,20 @@ import  arcade
 class SoundManager:
 
     def __init__(self):
-        self.volume = 0.2
+        self.music_volume = 1
+        self.volume = 0.5
+
+        self. background_music=arcade.load_sound("assets/sound/background_music.ogg")
+
         self.shoot_sound= arcade.load_sound("assets/sound/shoot.wav")
         self.enemy_death_sound= arcade.load_sound("assets/sound/enemy_death.wav")
         self.power_up_sound= arcade.load_sound("assets/sound/power_up.wav")
         self.player_hit_sound= arcade.load_sound("assets/sound/player_hit.wav")
         self.wave_start_sound= arcade.load_sound("assets/sound/wave_start.wav")
         self.game_over_sound= arcade.load_sound("assets/sound/game_over.wav")
+
+    def play_background_music(self):
+        arcade.play_sound(self.background_music,volume=self.music_volume,loop=True)
 
     def play_shoot(self):
         arcade.play_sound(self.shoot_sound,volume=self.volume)

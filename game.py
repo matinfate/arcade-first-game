@@ -611,6 +611,7 @@ class Game(arcade.Window):
         # Start game
         if key == arcade.key.SPACE and not self.game_started:
             self.game_started = True
+            self.sound_manager.play_background_music()
             return
 
         # Shoot
