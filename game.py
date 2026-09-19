@@ -8,6 +8,7 @@ from explosion import Explosion
 from particle import Particle
 from power_up import HealthPowerUp, ShieldPowerUp, RapidFirePowerUp
 from sound_manager import SoundManager
+from damage_number import DamageNumberList
 
 from settings import (
     SCREEN_WIDTH,
@@ -60,6 +61,9 @@ class Game(arcade.Window):
 
         # Sprite list for bullets
         self.bullet_list = arcade.SpriteList()
+
+        # Create a list to store damage number.
+        self.damage_number_list = DamageNumberList()
 
         # Create a list to store health power-ups.
         self.power_up_list = arcade.SpriteList()
@@ -141,6 +145,9 @@ class Game(arcade.Window):
 
         # Draw enemies
         self.enemy_list.draw()
+
+        # Draw damage_number
+        self.damage_number_list.draw()
 
         # Draw bullets
         self.bullet_list.draw()
@@ -511,6 +518,12 @@ class Game(arcade.Window):
                 enemy.health -= bullet.damage
                 bullet.remove_from_sprite_lists()
 
+                self.damage_number_list.add(
+                    enemy.center_x,
+                    enemy.top,
+                    bullet.damage
+                )
+
                 if enemy.health <= 0:
                     # Update score and kill count and play sound effect
                     self.score += enemy.score
@@ -591,6 +604,7 @@ class Game(arcade.Window):
         self.update_player(delta_time)
         self.update_enemies(delta_time)
         self.update_bullets(delta_time)
+        self.damage_number_list.update(delta_time)
         self.update_effects(delta_time)
         self.update_power_ups(delta_time)
         self.update_wave(delta_time)
@@ -723,6 +737,7 @@ class Game(arcade.Window):
         self.bullet_list.clear()
         self.enemy_list.clear()
         self.power_up_list.clear()
+        self.damage_number_list.clear()
 
         for i in range(self.enemy_count):
             self.create_enemy()
