@@ -368,34 +368,34 @@ class Game(arcade.Window):
             "GAME OVER",
             SCREEN_WIDTH / 2,
             350,
-            arcade.color.RED_PURPLE,
+            arcade.color.ORANGE_RED,
             40,
             anchor_x="center"
         )
 
         arcade.draw_text(
-            f"HIGH SCORE: {self.high_score}",
+            f"SCORE       {self.score}",
             SCREEN_WIDTH / 2,
-            300,
-            arcade.color.YELLOW,
-            22,
-            anchor_x="center"
-        )
-
-        arcade.draw_text(
-            f"SCORE: {self.score}",
-            SCREEN_WIDTH / 2,
-            265,
+            285,
             arcade.color.WHITE,
             20,
             anchor_x="center"
         )
 
         arcade.draw_text(
-            f"KILLS: {self.kills}",
+            f"HIGH SCORE  {self.high_score}",
             SCREEN_WIDTH / 2,
-            230,
-            arcade.color.WHITE,
+            250,
+            arcade.color.YELLOW,
+            20,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            f"KILLS       {self.kills}",
+            SCREEN_WIDTH / 2,
+            215,
+            arcade.color.ORANGE,
             20,
             anchor_x="center"
         )
@@ -403,12 +403,11 @@ class Game(arcade.Window):
         arcade.draw_text(
             "Press R to Restart",
             SCREEN_WIDTH / 2,
-            200,
-            arcade.color.WHITE,
-            20,
+            160,
+            arcade.color.LIGHT_GRAY,
+            16,
             anchor_x="center"
         )
-
 
     def on_draw(self):
         self.clear()
