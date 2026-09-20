@@ -215,6 +215,16 @@ class Game(arcade.Window):
             arcade.color.GREEN
         )
 
+        arcade.draw_text(
+            f"{self.player.health} / {max_health}",
+            health_x ,
+            42,
+            arcade.color.WHITE,
+            14,
+            anchor_x="center",
+            anchor_y="center"
+        )
+
         # Display current wave
         arcade.draw_text(
             f"WAVE {self.wave}",
