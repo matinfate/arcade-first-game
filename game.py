@@ -84,6 +84,7 @@ class Game(arcade.Window):
         # Game statistics
         self.score=0
         self.kills = 0
+        self.high_score = 0
 
         # Game states
         self.game_started=False
@@ -366,9 +367,18 @@ class Game(arcade.Window):
         arcade.draw_text(
             "GAME OVER",
             SCREEN_WIDTH / 2,
-            300,
+            350,
             arcade.color.RED_PURPLE,
             40,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            f"HIGH SCORE: {self.high_score}",
+            SCREEN_WIDTH / 2,
+            300,
+            arcade.color.YELLOW,
+            22,
             anchor_x="center"
         )
 
@@ -380,6 +390,7 @@ class Game(arcade.Window):
             20,
             anchor_x="center"
         )
+
 
     def on_draw(self):
         self.clear()
@@ -498,6 +509,10 @@ class Game(arcade.Window):
 
                     if self.player.health <= 0:
                         self.game_over = True
+
+                        if self.score>self.high_score:
+                            self.high_score = self.score
+
                         self.sound_manager.stop_background_music()
                         self.sound_manager.play_game_over()
 
