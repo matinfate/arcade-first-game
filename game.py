@@ -96,17 +96,26 @@ class Game(arcade.Window):
         arcade.draw_text(
             "ARCADE GAME",
             SCREEN_WIDTH / 2,
-            350,
-            arcade.color.WHITE,
-            40,
+            370,
+            arcade.color.ORANGE_RED,
+            44,
             anchor_x="center"
         )
 
         arcade.draw_text(
             "Press SPACE to Start",
             SCREEN_WIDTH / 2,
-            280,
+            290,
             arcade.color.YELLOW,
+            22,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            "CONTROLS",
+            SCREEN_WIDTH / 2,
+            230,
+            arcade.color.WHITE,
             20,
             anchor_x="center"
         )
@@ -114,8 +123,8 @@ class Game(arcade.Window):
         arcade.draw_text(
             "WASD: Move",
             SCREEN_WIDTH / 2,
-            220,
-            arcade.color.WHITE,
+            195,
+            arcade.color.LIGHT_GRAY,
             18,
             anchor_x="center"
         )
@@ -123,8 +132,8 @@ class Game(arcade.Window):
         arcade.draw_text(
             "SPACE: Shoot",
             SCREEN_WIDTH / 2,
-            190,
-            arcade.color.WHITE,
+            165,
+            arcade.color.LIGHT_GRAY,
             18,
             anchor_x="center"
         )
