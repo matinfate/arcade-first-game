@@ -383,9 +383,27 @@ class Game(arcade.Window):
         )
 
         arcade.draw_text(
+            f"SCORE: {self.score}",
+            SCREEN_WIDTH / 2,
+            265,
+            arcade.color.WHITE,
+            20,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
+            f"KILLS: {self.kills}",
+            SCREEN_WIDTH / 2,
+            230,
+            arcade.color.WHITE,
+            20,
+            anchor_x="center"
+        )
+
+        arcade.draw_text(
             "Press R to Restart",
             SCREEN_WIDTH / 2,
-            250,
+            200,
             arcade.color.WHITE,
             20,
             anchor_x="center"
