@@ -4,4 +4,7 @@ __pycache__/
 # Virtual environments
 .venv/
 
+# Game data
+data/high_score.txt
+
 

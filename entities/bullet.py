@@ -1,5 +1,5 @@
 import arcade
-from settings import BULLET_SPEED, BULLET_SCALE, BULLET_DAMAGE
+from config.settings import BULLET_SPEED, BULLET_SCALE, BULLET_DAMAGE
 
 class Bullet(arcade.Sprite):
 

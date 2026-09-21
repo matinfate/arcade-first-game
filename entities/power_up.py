@@ -1,6 +1,6 @@
 import arcade
 
-from settings import PLAYER_HEALTH,SHIELD_DURATION, RAPID_FIRE_DURATION
+from config.settings import PLAYER_HEALTH,SHIELD_DURATION, RAPID_FIRE_DURATION
 
 HEALTH_POWERUP_TEXTURE = arcade.load_texture(
     "assets/image/health_powerup.png"

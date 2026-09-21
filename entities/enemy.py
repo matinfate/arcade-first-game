@@ -1,7 +1,7 @@
 import arcade
 import random
 
-from settings import (
+from config.settings import (
     ENEMY_SPEED,
     ENEMY_HEALTH,
     ENEMY_SCORE,

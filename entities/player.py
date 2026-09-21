@@ -1,6 +1,6 @@
 import arcade
 
-from settings import (
+from config.settings import (
     PLAYER_SPEED,
     PLAYER_HEALTH,
     SCREEN_WIDTH,

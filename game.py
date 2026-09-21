@@ -1,16 +1,16 @@
 import arcade
 import random
 
-from player import Player
-from enemy import Enemy, FastEnemy, TankEnemy
-from bullet import Bullet
-from explosion import Explosion
-from particle import Particle
-from power_up import HealthPowerUp, ShieldPowerUp, RapidFirePowerUp
-from sound_manager import SoundManager
-from damage_number import DamageNumberList
+from entities.player import Player
+from entities.enemy import Enemy, FastEnemy, TankEnemy
+from entities.bullet import Bullet
+from entities.explosion import Explosion
+from entities.particle import Particle
+from entities.power_up import HealthPowerUp, ShieldPowerUp, RapidFirePowerUp
+from entities.damage_number import DamageNumberList
+from systems.sound_manager import SoundManager
 
-from settings import (
+from config.settings import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     SCREEN_TITLE,
@@ -93,7 +93,7 @@ class Game(arcade.Window):
 
     def load_high_score(self):
         try:
-            with open("high_score.txt", "r") as file:
+            with open("data/high_score.txt", "r") as file:
                 return int(file.read())
         except (FileNotFoundError, ValueError):
             return 0
@@ -655,7 +655,7 @@ class Game(arcade.Window):
 
     def on_update(self, delta_time):
 
-        # Stop updates when the game is inactive
+        # Stop updates when the entities is inactive
         if self.game_over or not self.game_started or self.paused:
             return
 
@@ -682,7 +682,7 @@ class Game(arcade.Window):
         if key == arcade.key.D:
             self.player.right_pressed = True
 
-        # Start game
+        # Start entities
         if key == arcade.key.SPACE and not self.game_started:
             self.game_started = True
             self.sound_manager.play_background_music()
@@ -704,7 +704,7 @@ class Game(arcade.Window):
         if key == arcade.key.ESCAPE and self.game_started and not self.game_over:
             self.paused = not self.paused
 
-        # Restart game
+        # Restart entities
         if key == arcade.key.R and self.game_over:
             self.restart_game()
 
@@ -777,10 +777,10 @@ class Game(arcade.Window):
         self.wave_timer = 0
 
     def save_high_score(self):
-        with open("high_score.txt", "w") as file:
+        with open("data/high_score.txt", "w") as file:
             file.write(str(self.high_score))
 
-    # Reset the game state
+    # Reset the entities state
     def restart_game(self):
 
         self.player.reset()

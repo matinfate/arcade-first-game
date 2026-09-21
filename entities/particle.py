@@ -1,7 +1,7 @@
 import arcade
 import random
 
-from settings import (
+from config.settings import (
     PARTICLE_MIN_SPEED,
     PARTICLE_MAX_SPEED,
     PARTICLE_LIFETIME,

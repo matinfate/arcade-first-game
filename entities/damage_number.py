@@ -1,6 +1,6 @@
 import arcade
 
-from settings import DAMAGE_NUMBER_LIFETIME, DAMAGE_NUMBER_SPEED
+from config.settings import DAMAGE_NUMBER_LIFETIME, DAMAGE_NUMBER_SPEED
 
 class DamageNumber:
     def __init__(self, x, y, damage):
