@@ -656,7 +656,7 @@ class Game(arcade.Window):
 
     def on_update(self, delta_time):
 
-        # Stop updates when the entities is inactive
+        # Stop updates when the entities are inactive
         if self.game_over or not self.game_started or self.paused:
             return
 
