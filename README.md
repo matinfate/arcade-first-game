@@ -1,187 +1,420 @@
-# Arcade First Game 🎮
+# Arcade First Game
 
-A 2D arcade shooter game built with **Python** and the **Arcade** library.
+A 2D arcade shooter built with Python and the Arcade library.
 
-This project is my first game development project and is focused on learning Python, Object-Oriented Programming (OOP), game architecture, collision systems, enemy behavior, power-ups, and game-state management.
+This project was created as a learning project to practice Python, object-oriented programming, game development, and basic game architecture.
 
 ## Features
 
-* 🎮 Start menu and game states
-* 🕹️ WASD player movement
-* 🔫 Shooting system with bullets
-* ⏱️ Shooting cooldown
-* ⚡ Rapid Fire power-up
-* 🛡️ Shield power-up
-* ❤️ Health power-up
-* 👾 Multiple enemy types
-* ⚡ Fast Enemy with zigzag movement
-* 🛡️ Tank Enemy with high health and knockback
-* ❤️ Player health system
-* ❤️ Enemy health bars
-* 💥 Explosion effects
-* ✨ Particle effects
-* 🏆 Score system
-* ☠️ Kill counter
-* 🌊 Wave-based enemy spawning
-* 📈 Increasing wave difficulty
-* 🛡️ Player invincibility after taking damage
-* 👾 Enemy collision avoidance
-* 🎯 Safe enemy spawning away from the player
-* ⏸️ Pause and resume system
-* 💀 Game Over screen
-* 🔄 Game restart system
-* 🧩 Object-Oriented game structure
-* ⚙️ Centralized game settings
+* 2D arcade shooter gameplay
+* WASD player movement
+* Spacebar shooting
+* Shooting cooldown system
+* Rapid Fire power-up
+* Player health system
+* Shield power-up
+* Health power-up
+* Temporary invincibility after taking damage
+* Multiple enemy types:
 
-## Enemy System
-
-The game currently contains three enemy types:
-
-### Normal Enemy
-
-* Balanced speed and health
-* Score: 10
-* Damage: 10
-
-### Fast Enemy
-
-* Higher movement speed
-* Lower health
-* Zigzag movement behavior
-* Score: 20
-* Damage: 15
-
-### Tank Enemy
-
-* Lower movement speed
-* High health
-* Higher damage
-* Knockback effect when attacking the player
-* Score: 30
-* Damage: 25
-
-Enemy properties such as speed, health, score, damage, and tank knockback are centralized in `settings.py`.
-
-## Bullet System
-
-The bullet system includes:
-
-* Configurable bullet speed
-* Configurable bullet scale
-* Configurable bullet damage
-* Automatic removal when bullets leave the screen
-* Collision detection between bullets and enemies
-* One bullet can damage only one enemy
-
-Bullet-specific behavior is encapsulated inside the `Bullet` class.
-
-## Power-Up System
-
-Enemies have a chance to drop a power-up when defeated.
-
-Current power-ups:
-
-### Health Power-Up ❤️
-
-Restores player health.
-
-### Shield Power-Up 🛡️
-
-Temporarily protects the player from enemy damage.
-
-### Rapid Fire Power-Up ⚡
-
-Temporarily increases the player's firing speed.
-
-Power-up textures are preloaded to prevent a delay when a power-up appears for the first time.
-
-## Wave System
-
-The game uses a wave-based progression system.
-
-* The first wave starts with 5 enemies.
-* Each completed wave increases the number of enemies.
-* Enemy type probabilities change as the wave number increases.
-* Fast and Tank enemies become more common in later waves.
-* A short delay occurs between completed waves.
-
-## Game States
-
-The game currently supports:
-
-* Main Menu
-* Playing
-* Paused
-* Wave Complete
-* Game Over
-* Restart
-
-## Project Structure
-
-```text
-arcade-first-game/
-│
-├── main.py
-├── game.py
-├── player.py
-├── enemy.py
-├── bullet.py
-├── explosion.py
-├── particle.py
-├── power_up.py
-├── settings.py
-├── README.md
-│
-└── assets/
-    └── image/
-        ├── player.png
-        ├── enemy.png
-        ├── fast_enemy.png
-        ├── tank_enemy.png
-        ├── bullet.png
-        ├── health_powerup.png
-        ├── shield_powerup.png
-        └── rapid_fire_powerup.png
-```
+  * Normal Enemy
+  * Fast Enemy
+  * Tank Enemy
+* Enemy health and damage systems
+* Enemy health bars
+* Enemy collision avoidance
+* Tank enemy knockback
+* Fast enemy zigzag movement
+* Safe enemy spawning
+* Wave-based progression
+* Increasing number of enemies per wave
+* Increasing enemy difficulty
+* Dynamic enemy type probabilities
+* Score system
+* Kill counter
+* Persistent local High Score
+* Game Over screen
+* Game restart system
+* Pause / Resume system
+* Wave completion countdown
+* Explosion effects
+* Particle effects
+* Damage numbers
+* Health, Shield, and Rapid Fire status bars
+* Sound effects
+* Background music
+* Separate music and sound-effect volume control
+* Background music lifecycle management
+* Main menu
+* Centered game window
 
 ## Controls
 
 | Key   | Action                  |
 | ----- | ----------------------- |
 | W     | Move Up                 |
-| S     | Move Down               |
 | A     | Move Left               |
+| S     | Move Down               |
 | D     | Move Right              |
-| SPACE | Shoot                   |
+| Space | Shoot                   |
 | ESC   | Pause / Resume          |
 | R     | Restart after Game Over |
 
+## Gameplay
+
+The player starts with a limited amount of health and must survive increasingly difficult waves of enemies.
+
+Enemies move toward the player and deal damage on collision.
+
+Different enemy types have different characteristics.
+
+### Normal Enemy
+
+The standard enemy type.
+
+* Balanced speed
+* Standard health
+* Standard damage
+* Standard score
+
+### Fast Enemy
+
+A faster and weaker enemy.
+
+* High movement speed
+* Lower health
+* Higher score
+* Zigzag movement pattern
+
+### Tank Enemy
+
+A slower but stronger enemy.
+
+* Low movement speed
+* High health
+* High damage
+* Higher score
+* Can knock the player back
+
+As the wave number increases, the game gradually increases the difficulty by spawning more enemies and changing the probability of enemy types.
+
+## Wave System
+
+The game starts with:
+
+* Wave 1
+* 5 enemies
+
+After completing a wave, the game waits briefly before starting the next wave.
+
+Each new wave increases the number of enemies.
+
+Enemy probabilities also change as the wave number increases, making Fast and Tank enemies more common during later waves.
+
+A short countdown is displayed between waves.
+
+## Power-Ups
+
+Enemies have a chance to drop a power-up when defeated.
+
+There are three types of power-ups.
+
+### Health
+
+Restores part of the player's health without exceeding maximum health.
+
+### Shield
+
+Temporarily protects the player from damage.
+
+### Rapid Fire
+
+Temporarily reduces the shooting cooldown, allowing the player to fire much faster.
+
+Active temporary power-ups are displayed on the HUD with status bars and timers.
+
+## Combat and Effects
+
+The game includes several visual effects to make combat more dynamic.
+
+### Explosions
+
+Enemies create an explosion effect when destroyed.
+
+### Particles
+
+Particle effects are generated when enemies are destroyed.
+
+### Damage Numbers
+
+Damage values can be displayed when enemies are hit.
+
+### Enemy Health Bars
+
+Enemy health bars visually indicate how much health remains.
+
+## Audio
+
+The game includes:
+
+* Shooting sound
+* Enemy death sound
+* Player hit sound
+* Power-up sound
+* Wave start sound
+* Game Over sound
+* Background music
+
+Background music loops during gameplay and is stopped when the game ends.
+
+Music and sound effects use separate volume settings.
+
+## Score System
+
+The player earns points by defeating enemies.
+
+Different enemy types award different amounts of score.
+
+The HUD displays:
+
+* Score
+* Kill count
+* Current wave
+* Player health
+* Active power-up timers
+
+## High Score
+
+The highest score is saved locally on the player's computer.
+
+The file is stored at:
+
+```text
+data/high_score.txt
+```
+
+The High Score file is not included in version control because each player should have their own record.
+
+If the `data` directory does not exist, the game creates it automatically when the High Score is first saved.
+
+This means a new player starts with a High Score of `0`, while returning players keep their own previous record.
+
+## Pause / Resume
+
+Press:
+
+```text
+ESC
+```
+
+during gameplay to pause or resume the game.
+
+While paused, the game logic stops until the player resumes the game.
+
+## Game Over
+
+When the player's health reaches zero, the game enters the Game Over state.
+
+The Game Over screen displays:
+
+* Current score
+* High Score
+* Kill count
+* Restart option
+
+The background music stops and the Game Over sound is played.
+
+Press `R` to restart the game.
+
+## Project Structure
+
+```text
+arcade-first-game/
+│
+├── assets/
+│   ├── image/
+│   │   ├── bullet.png
+│   │   ├── enemy.png
+│   │   ├── fast_enemy.png
+│   │   ├── health_powerup.png
+│   │   ├── player.png
+│   │   ├── rapid_fire_powerup.png
+│   │   ├── shield_powerup.png
+│   │   └── tank_enemy.png
+│   │
+│   └── sound/
+│       ├── background_music.ogg
+│       ├── enemy_death.wav
+│       ├── game_over.wav
+│       ├── player_hit.wav
+│       ├── power_up.wav
+│       ├── shoot.wav
+│       └── wave_start.wav
+│
+├── config/
+│   └── settings.py
+│
+├── data/
+│   └── high_score.txt
+│
+├── entities/
+│   ├── bullet.py
+│   ├── damage_number.py
+│   ├── enemy.py
+│   ├── explosion.py
+│   ├── particle.py
+│   ├── player.py
+│   └── power_up.py
+│
+├── systems/
+│   └── sound_manager.py
+│
+├── game.py
+├── main.py
+├── .gitignore
+└── README.md
+```
+
+## Architecture
+
+The project is divided into several logical sections.
+
+### `game.py`
+
+Contains the main game controller and manages:
+
+* Game states
+* Player
+* Enemies
+* Bullets
+* Power-ups
+* Waves
+* Score
+* Collisions
+* HUD
+* Game Over
+* Pause
+* Game restart
+
+### `entities/`
+
+Contains the main gameplay objects:
+
+* `player.py` — Player
+* `enemy.py` — Enemy classes
+* `bullet.py` — Bullets
+* `power_up.py` — Power-ups
+* `explosion.py` — Explosion effects
+* `particle.py` — Particle effects
+* `damage_number.py` — Damage number effects
+
+### `systems/`
+
+Contains reusable game systems.
+
+Currently:
+
+```text
+sound_manager.py
+```
+
+is responsible for loading and playing sound effects and background music.
+
+### `config/`
+
+Contains centralized game settings such as:
+
+* Screen size
+* Player settings
+* Enemy settings
+* Wave settings
+* Bullet settings
+* Shooting cooldown
+* Power-up durations
+* Particle settings
+
+### `data/`
+
+Contains locally generated game data.
+
+The High Score file is intentionally ignored by Git so each player can have their own record.
+
+### `assets/`
+
+Contains game resources such as images and sounds.
+
+## Requirements
+
+* Python 3.11+
+* Arcade
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/matinfate/arcade-first-game.git
+```
+
+Enter the project directory:
+
+```bash
+cd arcade-first-game
+```
+
+Install Arcade:
+
+```bash
+pip install arcade
+```
+
+## Running the Game
+
+Run:
+
+```bash
+python main.py
+```
+
+The main menu will appear when the game starts.
+
+Press:
+
+```text
+SPACE
+```
+
+to start the game.
+
 ## Technologies
 
-* **Python**
-* **Arcade**
-* **Object-Oriented Programming**
-* **Git**
-* **GitHub**
-* **PyCharm**
+* Python
+* Arcade
+* Object-Oriented Programming
+* Git
+* GitHub
 
-## Project Goal
+## Project Goals
 
-The main goal of this project is to learn the fundamentals of game development while improving my Python and OOP skills through a practical project.
+This project was created primarily for learning and practicing:
 
-The project is being developed incrementally, with a focus on clean architecture, reusable classes, centralized configuration, and gradually improving game systems.
+* Python programming
+* Object-oriented programming
+* Game development
+* Game loops
+* Collision detection
+* Sprite management
+* Game states
+* Game architecture
+* Audio management
+* Basic visual effects
+* File-based data persistence
+* Git and GitHub workflow
 
-## Future Plans
+## Project Status
 
-Possible future improvements include:
+**Version 1.0 — Complete**
 
-* More enemy types
-* More weapons
-* Additional power-ups
-* Boss enemies
-* Sound effects and background music
-* Improved animations
-* More advanced enemy AI
-* Better menus and UI
-* Additional levels and game modes
-* Further code refactoring and optimization
+The first playable version of the game is complete and includes the core gameplay systems, multiple enemy types, wave progression, power-ups, audio, visual effects, scoring, High Score persistence, pause/resume, restart, and Game Over functionality.
+
+Future development can focus on additional gameplay mechanics, balancing, visual polish, content, and new features.
