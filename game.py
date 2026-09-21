@@ -1,5 +1,6 @@
 import arcade
 import random
+import os
 
 from entities.player import Player
 from entities.enemy import Enemy, FastEnemy, TankEnemy
@@ -777,6 +778,8 @@ class Game(arcade.Window):
         self.wave_timer = 0
 
     def save_high_score(self):
+        os.makedirs("data", exist_ok=True)
+
         with open("data/high_score.txt", "w") as file:
             file.write(str(self.high_score))
 
