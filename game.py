@@ -84,12 +84,19 @@ class Game(arcade.Window):
         # Game statistics
         self.score=0
         self.kills = 0
-        self.high_score = 0
+        self.high_score = self.load_high_score()
 
         # Game states
         self.game_started=False
         self.paused = False
         self.game_over = False
+
+    def load_high_score(self):
+        try:
+            with open("high_score.txt", "r") as file:
+                return int(file.read())
+        except (FileNotFoundError, ValueError):
+            return 0
 
     def draw_main_menu(self):
 
@@ -538,6 +545,7 @@ class Game(arcade.Window):
 
                         if self.score>self.high_score:
                             self.high_score = self.score
+                            self.save_high_score()
 
                         self.sound_manager.stop_background_music()
                         self.sound_manager.play_game_over()
@@ -767,6 +775,10 @@ class Game(arcade.Window):
         self.enemy_count = 5
         self.wave_complete = False
         self.wave_timer = 0
+
+    def save_high_score(self):
+        with open("high_score.txt", "w") as file:
+            file.write(str(self.high_score))
 
     # Reset the game state
     def restart_game(self):
