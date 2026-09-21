@@ -1,17 +1,18 @@
 import arcade
 
 from config.settings import PLAYER_HEALTH,SHIELD_DURATION, RAPID_FIRE_DURATION
+from config.paths import resource_path
 
 HEALTH_POWERUP_TEXTURE = arcade.load_texture(
-    "assets/image/health_powerup.png"
+    resource_path("assets/image/health_powerup.png")
 )
 
 SHIELD_POWERUP_TEXTURE = arcade.load_texture(
-    "assets/image/shield_powerup.png"
+    resource_path("assets/image/shield_powerup.png")
 )
 
 RAPID_FIRE_POWERUP_TEXTURE = arcade.load_texture(
-    "assets/image/rapid_fire_powerup.png"
+    resource_path("assets/image/rapid_fire_powerup.png")
 )
 
 class PowerUp(arcade.Sprite):
@@ -57,3 +58,5 @@ class RapidFirePowerUp(PowerUp):
 
     def collect(self, player):
         player.activate_rapid_fire(self.duration)
+
+

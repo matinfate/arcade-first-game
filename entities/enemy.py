@@ -1,6 +1,7 @@
 import arcade
 import random
 
+from config.paths import resource_path
 from config.settings import (
     ENEMY_SPEED,
     ENEMY_HEALTH,
@@ -22,7 +23,7 @@ from config.settings import (
 
 class Enemy(arcade.Sprite):
 
-    def __init__(self, image="assets/image/enemy.png"):
+    def __init__(self, image=resource_path("assets/image/enemy.png")):
         super().__init__(image)
 
         self.scale = 0.2
@@ -92,7 +93,7 @@ class Enemy(arcade.Sprite):
 class FastEnemy(Enemy):
 
     def __init__(self):
-        super().__init__("assets/image/fast_enemy.png")
+        super().__init__(resource_path("assets/image/fast_enemy.png"))
 
         self.scale = 0.1
         self.speed = FAST_ENEMY_SPEED
@@ -122,7 +123,7 @@ class FastEnemy(Enemy):
 class TankEnemy(Enemy):
 
     def __init__(self):
-        super().__init__("assets/image/tank_enemy.png")
+        super().__init__(resource_path("assets/image/tank_enemy.png"))
 
         self.scale = 0.5
         self.speed = TANK_ENEMY_SPEED
@@ -132,3 +133,5 @@ class TankEnemy(Enemy):
         self.damage = TANK_ENEMY_DAMAGE
 
         self.knockback = TANK_ENEMY_KNOCKBACK
+
+

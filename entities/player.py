@@ -1,5 +1,6 @@
 import arcade
 
+from config.paths import resource_path
 from config.settings import (
     PLAYER_SPEED,
     PLAYER_HEALTH,
@@ -12,7 +13,7 @@ class Player(arcade.Sprite):
     def __init__(self):
 
         # Create a Sprite using the player image.
-        super().__init__("assets/image/player.png")
+        super().__init__(resource_path("assets/image/player.png"))
 
         # Change the size of the Sprite.
         self.scale = 0.2
@@ -83,3 +84,5 @@ class Player(arcade.Sprite):
         self.center_y = self.start_y
 
         self.visible=True
+
+

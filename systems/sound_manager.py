@@ -1,4 +1,5 @@
 import  arcade
+from config.paths import resource_path
 
 class SoundManager:
 
@@ -6,15 +7,15 @@ class SoundManager:
         self.music_volume = 1
         self.volume = 0.5
 
-        self. background_music=arcade.load_sound("assets/sound/background_music.ogg")
+        self. background_music=arcade.load_sound(resource_path("assets/sound/background_music.ogg"))
         self.background_music_player = None
 
-        self.shoot_sound= arcade.load_sound("assets/sound/shoot.wav")
-        self.enemy_death_sound= arcade.load_sound("assets/sound/enemy_death.wav")
-        self.power_up_sound= arcade.load_sound("assets/sound/power_up.wav")
-        self.player_hit_sound= arcade.load_sound("assets/sound/player_hit.wav")
-        self.wave_start_sound= arcade.load_sound("assets/sound/wave_start.wav")
-        self.game_over_sound= arcade.load_sound("assets/sound/game_over.wav")
+        self.shoot_sound= arcade.load_sound(resource_path("assets/sound/shoot.wav"))
+        self.enemy_death_sound= arcade.load_sound(resource_path("assets/sound/enemy_death.wav"))
+        self.power_up_sound= arcade.load_sound(resource_path("assets/sound/power_up.wav"))
+        self.player_hit_sound= arcade.load_sound(resource_path("assets/sound/player_hit.wav"))
+        self.wave_start_sound= arcade.load_sound(resource_path("assets/sound/wave_start.wav"))
+        self.game_over_sound= arcade.load_sound(resource_path("assets/sound/game_over.wav"))
 
     def play_background_music(self):
         self.background_music_player = self.background_music.play(volume=self.music_volume,loop=True)
@@ -41,3 +42,5 @@ class SoundManager:
 
     def play_game_over(self):
         arcade.play_sound(self.game_over_sound,volume=self.volume)
+
+

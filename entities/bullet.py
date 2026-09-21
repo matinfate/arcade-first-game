@@ -1,10 +1,12 @@
 import arcade
+
 from config.settings import BULLET_SPEED, BULLET_SCALE, BULLET_DAMAGE
+from config.paths import resource_path
 
 class Bullet(arcade.Sprite):
 
     def __init__(self, x, y):
-        super().__init__("assets/image/bullet.png")
+        super().__init__(resource_path("assets/image/bullet.png"))
 
         self.scale = BULLET_SCALE
         self.speed = BULLET_SPEED
@@ -13,3 +15,4 @@ class Bullet(arcade.Sprite):
         self.bottom = y
 
         self.damage = BULLET_DAMAGE
+
