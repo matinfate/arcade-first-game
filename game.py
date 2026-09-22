@@ -25,6 +25,7 @@ from config.settings import (
     STARTING_ENEMY_COUNT,
     ENEMIES_ADDED_PER_WAVE,
     WAVE_DELAY,
+    POWER_UP_DROP_CHANCE,
     SHIELD_DURATION,
     RAPID_FIRE_DURATION,
     PARTICLE_COUNT
@@ -592,7 +593,7 @@ class Game(arcade.Window):
                     self.sound_manager.play_enemy_death()
 
                     # Spawn a  power-up with a 20% chance
-                    if random.random() < 0.2:
+                    if random.random() < POWER_UP_DROP_CHANCE:
                         power_up_type = random.choice([HealthPowerUp, RapidFirePowerUp, ShieldPowerUp])
                         power_up = power_up_type()
                         power_up.center_x = enemy.center_x
