@@ -803,6 +803,8 @@ class Game(arcade.Window):
         self.enemy_list.clear()
         self.power_up_list.clear()
         self.damage_number_list.clear()
+        self.explosion_list.clear()
+        self.particles.clear()
 
         for i in range(self.enemy_count):
             self.create_enemy()

@@ -1,6 +1,6 @@
 import arcade
 
-from config.settings import PLAYER_HEALTH,SHIELD_DURATION, RAPID_FIRE_DURATION
+from config.settings import SHIELD_DURATION, RAPID_FIRE_DURATION
 from config.paths import resource_path
 
 HEALTH_POWERUP_TEXTURE = arcade.load_texture(
@@ -35,7 +35,7 @@ class HealthPowerUp(PowerUp):
 
     def collect(self, player):
         player.health = min(
-            PLAYER_HEALTH,
+            player.max_health,
             player.health + self.health_amount
         )
 
