@@ -2,6 +2,7 @@ import arcade
 import random
 import os
 
+from config.paths import data_path, resource_path
 from entities.player import Player
 from entities.enemy import Enemy, FastEnemy, TankEnemy
 from entities.bullet import Bullet
@@ -94,7 +95,7 @@ class Game(arcade.Window):
 
     def load_high_score(self):
         try:
-            with open("data/high_score.txt", "r") as file:
+            with open(data_path("high_score.txt"), "r") as file:
                 return int(file.read())
         except (FileNotFoundError, ValueError):
             return 0
@@ -778,9 +779,7 @@ class Game(arcade.Window):
         self.wave_timer = 0
 
     def save_high_score(self):
-        os.makedirs("data", exist_ok=True)
-
-        with open("data/high_score.txt", "w") as file:
+        with open(data_path("high_score.txt"), "w") as file:
             file.write(str(self.high_score))
 
     # Reset the entities state
