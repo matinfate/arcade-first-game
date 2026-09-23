@@ -16,6 +16,10 @@ from config.settings import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     SCREEN_TITLE,
+    PLAYER_HEALTH_BAR_X,
+    PLAYER_HEALTH_BAR_Y,
+    PLAYER_HEALTH_BAR_WIDTH,
+    PLAYER_HEALTH_BAR_HEIGHT,
     SHOOT_COOLDOWN,
     INVINCIBILITY_TIME,
     ENEMY_MIN_SPAWN_DISTANCE,
@@ -209,16 +213,17 @@ class Game(arcade.Window):
 
         # Draw player health bar
         max_health = self.player.max_health
-        health_x = 110
-        health_width = 200
-        health_height = 20
+        health_x = PLAYER_HEALTH_BAR_X
+        health_y = PLAYER_HEALTH_BAR_Y
+        health_width = PLAYER_HEALTH_BAR_WIDTH
+        health_height = PLAYER_HEALTH_BAR_HEIGHT
         health_ratio = self.player.health / max_health
         current_health_width = health_width * health_ratio
 
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
                 health_x,
-                40,
+                health_y,
                 health_width,
                 health_height
             ),
@@ -228,7 +233,7 @@ class Game(arcade.Window):
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
                 10 + current_health_width / 2,
-                40,
+                health_y,
                 current_health_width,
                 health_height
             ),
