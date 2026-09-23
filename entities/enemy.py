@@ -5,6 +5,7 @@ from config.paths import resource_path
 from config.settings import (
     ENEMY_HEALTH_BAR_HEIGHT,
     ENEMY_HEALTH_BAR_WIDTH,
+    ENEMY_HEALTH_BAR_OFFSET_Y,
     ENEMY_SCALE,
     ENEMY_SPEED,
     ENEMY_HEALTH,
@@ -67,7 +68,7 @@ class Enemy(arcade.Sprite):
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
                 self.center_x,
-                self.center_y + 30,
+                self.center_y + ENEMY_HEALTH_BAR_OFFSET_Y,
                 health_width,
                 health_height
             ),
@@ -77,7 +78,7 @@ class Enemy(arcade.Sprite):
         arcade.draw_rect_filled(
             arcade.rect.XYWH(
                 self.center_x - (health_width - current_width) / 2,
-                self.center_y + 30,
+                self.center_y + ENEMY_HEALTH_BAR_OFFSET_Y,
                 current_width,
                 health_height),
             arcade.color.GREEN
