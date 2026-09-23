@@ -3,17 +3,20 @@ import random
 
 from config.paths import resource_path
 from config.settings import (
+    ENEMY_SCALE,
     ENEMY_SPEED,
     ENEMY_HEALTH,
     ENEMY_SCORE,
     ENEMY_DAMAGE,
     ENEMY_AVOID_SPEED,
+    FAST_ENEMY_SCALE,
     FAST_ENEMY_SPEED,
     FAST_ENEMY_HEALTH,
     FAST_ENEMY_SCORE,
     FAST_ENEMY_DAMAGE,
     FAST_ENEMY_ZIGZAG_SPEED,
     FAST_ENEMY_ZIGZAG_INTERVAL,
+    TANK_ENEMY_SCALE,
     TANK_ENEMY_SPEED,
     TANK_ENEMY_HEALTH,
     TANK_ENEMY_SCORE,
@@ -26,7 +29,7 @@ class Enemy(arcade.Sprite):
     def __init__(self, image=resource_path("assets/image/enemy.png")):
         super().__init__(image)
 
-        self.scale = 0.2
+        self.scale = ENEMY_SCALE
         self.speed = ENEMY_SPEED
 
         self.score = ENEMY_SCORE
@@ -95,7 +98,7 @@ class FastEnemy(Enemy):
     def __init__(self):
         super().__init__(resource_path("assets/image/fast_enemy.png"))
 
-        self.scale = 0.1
+        self.scale = FAST_ENEMY_SCALE
         self.speed = FAST_ENEMY_SPEED
         self.max_health = FAST_ENEMY_HEALTH
         self.health = self.max_health
@@ -125,7 +128,7 @@ class TankEnemy(Enemy):
     def __init__(self):
         super().__init__(resource_path("assets/image/tank_enemy.png"))
 
-        self.scale = 0.5
+        self.scale = TANK_ENEMY_SCALE
         self.speed = TANK_ENEMY_SPEED
         self.max_health = TANK_ENEMY_HEALTH
         self.health = self.max_health
