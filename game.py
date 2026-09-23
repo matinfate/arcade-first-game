@@ -775,7 +775,7 @@ class Game(arcade.Window):
 
     def reset_wave(self):
         self.wave = 1
-        self.enemy_count = 5
+        self.enemy_count = STARTING_ENEMY_COUNT
         self.wave_complete = False
         self.wave_timer = 0
 
