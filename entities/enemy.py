@@ -3,6 +3,8 @@ import random
 
 from config.paths import resource_path
 from config.settings import (
+    ENEMY_HEALTH_BAR_HEIGHT,
+    ENEMY_HEALTH_BAR_WIDTH,
     ENEMY_SCALE,
     ENEMY_SPEED,
     ENEMY_HEALTH,
@@ -55,8 +57,8 @@ class Enemy(arcade.Sprite):
             self.center_y -= self.speed * delta_time
 
     def draw_health_bar(self):
-        health_width = 40
-        health_height = 5
+        health_width = ENEMY_HEALTH_BAR_WIDTH
+        health_height = ENEMY_HEALTH_BAR_HEIGHT
 
         health_ratio = max(0, min(1, self.health / self.max_health))
 
