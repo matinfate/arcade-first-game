@@ -11,6 +11,10 @@ from config.settings import (
     ENEMY_HEALTH,
     ENEMY_SCORE,
     ENEMY_DAMAGE,
+    ENEMY_SPAWN_MIN_X,
+    ENEMY_SPAWN_MAX_X,
+    ENEMY_SPAWN_MIN_Y,
+    ENEMY_SPAWN_MAX_Y,
     ENEMY_AVOID_SPEED,
     FAST_ENEMY_SCALE,
     FAST_ENEMY_SPEED,
@@ -42,8 +46,8 @@ class Enemy(arcade.Sprite):
 
         self.damage = ENEMY_DAMAGE
 
-        self.center_x = random.randint(50, 750)
-        self.center_y = random.randint(400, 550)
+        self.center_x = random.randint(ENEMY_SPAWN_MIN_X, ENEMY_SPAWN_MAX_X)
+        self.center_y = random.randint(ENEMY_SPAWN_MIN_Y, ENEMY_SPAWN_MAX_Y)
 
     def move_toward_player(self,player,delta_time):
 
