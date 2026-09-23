@@ -1,6 +1,6 @@
 import arcade
 
-from config.settings import SHIELD_DURATION, RAPID_FIRE_DURATION,HEALTH_POWERUP_AMOUNT
+from config.settings import SHIELD_DURATION, RAPID_FIRE_DURATION,HEALTH_POWERUP_AMOUNT,POWER_UP_SPEED
 from config.paths import resource_path
 
 HEALTH_POWERUP_TEXTURE = arcade.load_texture(
@@ -17,7 +17,7 @@ RAPID_FIRE_POWERUP_TEXTURE = arcade.load_texture(
 
 class PowerUp(arcade.Sprite):
 
-    def __init__(self, image, scale=0.02, speed=80):
+    def __init__(self, image, scale=0.02, speed=POWER_UP_SPEED):
         super().__init__(image)
 
         self.scale = scale
