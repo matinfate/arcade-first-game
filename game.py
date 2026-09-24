@@ -337,21 +337,54 @@ class Game(arcade.Window):
 
     def draw_pause_menu(self):
 
+        # Dark overlay
+        arcade.draw_rect_filled(
+            arcade.rect.XYWH(
+                SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 2,
+                SCREEN_WIDTH,
+                SCREEN_HEIGHT
+            ),
+            (0, 0, 0, 150)
+        )
+
+        # Title
         arcade.draw_text(
             "PAUSED",
             SCREEN_WIDTH / 2,
-            300,
+            350,
             arcade.color.YELLOW,
             40,
             anchor_x="center"
         )
 
+        # Separator
+        arcade.draw_line(
+            SCREEN_WIDTH / 2 - 150,
+            320,
+            SCREEN_WIDTH / 2 + 150,
+            320,
+            arcade.color.GRAY,
+            2
+        )
+
+        # Resume instruction
         arcade.draw_text(
             "Press ESC to Resume",
             SCREEN_WIDTH / 2,
-            250,
+            275,
             arcade.color.WHITE,
             20,
+            anchor_x="center"
+        )
+
+        # Hint
+        arcade.draw_text(
+            "Game is paused",
+            SCREEN_WIDTH / 2,
+            235,
+            arcade.color.LIGHT_GRAY,
+            14,
             anchor_x="center"
         )
 
@@ -449,7 +482,7 @@ class Game(arcade.Window):
             self.draw_pause_menu()
 
         # Display wave completion message
-        if self.wave_complete and not self.game_over:
+        elif self.wave_complete and not self.game_over:
             self.draw_wave_complete()
 
         # Game over screen
