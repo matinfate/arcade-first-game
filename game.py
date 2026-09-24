@@ -390,32 +390,56 @@ class Game(arcade.Window):
 
     def draw_wave_complete(self):
 
+        # Dark overlay
+        arcade.draw_rect_filled(
+            arcade.rect.XYWH(
+                SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 2,
+                SCREEN_WIDTH,
+                SCREEN_HEIGHT
+            ),
+            (0, 0, 0, 120)
+        )
+
         remaining_time = max(0, self.wave_delay - self.wave_timer)
 
+        # Title
         arcade.draw_text(
             f"WAVE {self.wave} COMPLETE!",
             SCREEN_WIDTH / 2,
-            350,
+            360,
             arcade.color.YELLOW,
-            26,
+            32,
             anchor_x="center"
         )
 
+        # Separator
+        arcade.draw_line(
+            SCREEN_WIDTH / 2 - 150,
+            325,
+            SCREEN_WIDTH / 2 + 150,
+            325,
+            arcade.color.GRAY,
+            2
+        )
+
+        # Next wave text
         arcade.draw_text(
-            "NEXT WAVE",
+            "NEXT WAVE IN",
             SCREEN_WIDTH / 2,
-            305,
+            285,
             arcade.color.WHITE,
             18,
             anchor_x="center"
         )
 
+        # Countdown
         arcade.draw_text(
             f"{remaining_time:.1f}",
             SCREEN_WIDTH / 2,
-            250,
+            220,
             arcade.color.YELLOW,
-            42,
+            44,
             anchor_x="center"
         )
 
