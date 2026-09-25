@@ -1,190 +1,49 @@
-# Arcade First Game 🎮
+# Arcade First Game
 
-A 2D arcade shooter game built with Python and the [Arcade](https://api.arcade.academy/) library.
+A 2D arcade shooter developed with Python and the [Arcade](https://api.arcade.academy/) framework.
 
-This project started as my first game development project and is focused on learning Python, Object-Oriented Programming (OOP), game architecture, collision systems, enemy behavior, game states, audio systems, resource management, and game packaging.
-
-## Features
-
-* 🎮 Main Menu and multiple game states
-* 🕹️ WASD player movement
-* 🔫 Shooting system with bullets
-* ⏱️ Shooting cooldown
-* ⚡ Rapid Fire power-up
-* 🛡️ Shield power-up
-* ❤️ Health power-up
-* 👾 Multiple enemy types
-* ⚡ Fast Enemy with zigzag movement
-* 🛡️ Tank Enemy with high health and knockback
-* ❤️ Player health system
-* ❤️ Enemy health bars
-* 💥 Explosion effects
-* ✨ Particle effects
-* 🔢 Damage numbers
-* 🏆 Score system
-* 🥇 Persistent High Score
-* ☠️ Kill counter
-* 🌊 Wave-based enemy spawning
-* 📈 Increasing wave difficulty
-* 🛡️ Player invincibility after taking damage
-* 👾 Enemy collision avoidance
-* 🎯 Safe enemy spawning away from the player
-* ⏸️ Pause and Resume system
-* 💀 Game Over screen
-* 🔄 Game Restart system
-* 🔊 Sound effects
-* 🎵 Background music
-* 🔉 Separate music and effects volume
-* 🧩 Object-Oriented game structure
-* ⚙️ Centralized game settings
-* 📦 Standalone Windows executable support with PyInstaller
+This project was created as a practical software development project for learning and applying Python, Object-Oriented Programming (OOP), modular architecture, game-state management, collision systems, enemy behavior, resource management, audio systems, UI design, and application packaging.
 
 ---
 
-## Enemy System
+## Overview
 
-The game currently contains three enemy types.
+The game is structured around a central game controller, reusable game entities, centralized configuration, and dedicated systems.
 
-### Normal Enemy
+Current functionality includes:
 
-* Balanced speed and health
-* Score: 10
-* Damage: 10
-
-### Fast Enemy
-
-* Higher movement speed
-* Lower health
-* Zigzag movement behavior
-* Score: 20
-* Damage: 15
-
-### Tank Enemy
-
-* Lower movement speed
-* High health
-* Higher damage
-* Knockback effect when attacking the player
-* Score: 30
-* Damage: 25
-
-Enemy properties such as speed, health, score, damage, and knockback are centralized in `config/settings.py`.
+* Player movement and shooting
+* Multiple enemy types
+* Wave-based gameplay
+* Enemy health and damage systems
+* Enemy collision avoidance
+* Safe enemy spawning
+* Power-ups
+* Collision handling
+* Particle and explosion effects
+* Damage numbers
+* Score and kill tracking
+* Persistent local High Score
+* Player invincibility after taking damage
+* Pause and Resume
+* Wave completion countdown
+* Game Over and Restart
+* Background music and sound effects
+* Centralized configuration
+* PyInstaller-based Windows packaging
 
 ---
 
-## Bullet System
+## Tech Stack
 
-The bullet system includes:
-
-* Configurable bullet speed
-* Configurable bullet scale
-* Configurable bullet damage
-* Automatic removal when bullets leave the screen
-* Collision detection between bullets and enemies
-* One bullet can damage only one enemy
-
-Bullet-specific behavior is encapsulated inside the `Bullet` class.
-
----
-
-## Power-Up System
-
-Enemies have a chance to drop a power-up when defeated.
-
-### Health Power-Up ❤️
-
-Restores player health.
-
-### Shield Power-Up 🛡️
-
-Temporarily protects the player from enemy damage.
-
-### Rapid Fire Power-Up ⚡
-
-Temporarily increases the player's firing speed.
-
-Power-up textures are preloaded to prevent a delay when a power-up appears for the first time.
-
----
-
-## Wave System
-
-The game uses a wave-based progression system.
-
-* The first wave starts with 5 enemies.
-* Each completed wave increases the number of enemies.
-* Enemy type probabilities change as the wave number increases.
-* Fast and Tank enemies become more common in later waves.
-* A short countdown occurs between completed waves.
-* A wave start sound is played when a new wave begins.
-
----
-
-## Game States
-
-The game currently supports:
-
-* Main Menu
-* Playing
-* Paused
-* Wave Complete
-* Game Over
-* Restart
-
----
-
-## Audio System
-
-The game includes a dedicated `SoundManager` responsible for managing game audio.
-
-### Sound Effects
-
-* Shooting
-* Enemy death
-* Player hit
-* Power-up collection
-* Wave start
-* Game over
-
-### Background Music
-
-The game includes looping background music during gameplay.
-
-Background music stops when the player reaches Game Over and starts again when the game is restarted.
-
-Music and sound effects use separate volume settings.
-
----
-
-## Score and High Score
-
-The game tracks:
-
-* Current Score
-* Kill Count
-* High Score
-
-The High Score is stored locally in:
-
-```text
-data/high_score.txt
-```
-
-The file is automatically created when necessary and is ignored by Git so that each player can have their own local High Score.
-
----
-
-## Controls
-
-| Key   | Action                  |
-| ----- | ----------------------- |
-| W     | Move Up                 |
-| A     | Move Left               |
-| S     | Move Down               |
-| D     | Move Right              |
-| SPACE | Shoot                   |
-| ESC   | Pause / Resume          |
-| R     | Restart after Game Over |
+| Technology  | Version / Usage         |
+| ----------- | ----------------------- |
+| Python      | 3.11.2                  |
+| Arcade      | 3.3.3                   |
+| PyInstaller | Windows packaging       |
+| Git         | Version control         |
+| GitHub      | Repository hosting      |
+| PyCharm     | Development environment |
 
 ---
 
@@ -239,46 +98,390 @@ arcade-first-game/
 └── README.md
 ```
 
-### Architecture
+---
 
-The project separates different responsibilities into dedicated modules:
+## Architecture
 
-* `game.py` — Main game logic, game states, waves, collisions, scoring, and rendering
-* `main.py` — Application entry point
-* `entities/` — Game entities such as the player, enemies, bullets, particles, explosions, and power-ups
-* `systems/` — Reusable game systems such as audio management
-* `config/settings.py` — Centralized gameplay and window configuration
-* `config/paths.py` — Resource path management for normal Python execution and PyInstaller builds
-* `assets/` — Images and audio files
-* `data/` — Local player data such as High Score
-* `ArcadeGame.spec` — PyInstaller build configuration
+The project separates different responsibilities into dedicated modules.
+
+### `game.py`
+
+Main game controller responsible for:
+
+* Game-state management
+* Player and enemy lifecycle
+* Wave management
+* Collision handling
+* Shooting
+* Scoring
+* Power-up handling
+* Effects
+* Rendering
+* Game restart
+* Game Over flow
+
+### `entities/`
+
+Contains the main game entities.
+
+| Module             | Responsibility                           |
+| ------------------ | ---------------------------------------- |
+| `player.py`        | Player movement, health and player state |
+| `enemy.py`         | Normal, Fast and Tank enemies            |
+| `bullet.py`        | Bullet behavior and movement             |
+| `power_up.py`      | Health, Shield and Rapid Fire power-ups  |
+| `explosion.py`     | Explosion effects                        |
+| `particle.py`      | Particle effects                         |
+| `damage_number.py` | Damage number display                    |
+
+### `systems/`
+
+Contains reusable game systems.
+
+`systems/sound_manager.py` manages:
+
+* Background music
+* Shooting sounds
+* Enemy death sounds
+* Player hit sounds
+* Power-up sounds
+* Wave start sounds
+* Game Over sound
+
+### `config/`
+
+Contains centralized configuration and resource-path handling.
+
+`config/settings.py` contains configuration for:
+
+* Window
+* Player
+* Enemies
+* Waves
+* Bullets
+* Shooting
+* Power-ups
+* Damage
+* Particles
+* UI
+
+`config/paths.py` provides resource and data paths for source execution and PyInstaller builds.
+
+---
+
+## Game States
+
+The game currently supports the following states:
+
+```text
+Main Menu
+    │
+    ▼
+ Playing
+    │
+    ├── Pause ──────► Playing
+    │
+    ├── Wave Complete
+    │
+    └── Game Over
+             │
+             ▼
+          Restart
+             │
+             ▼
+          Playing
+```
+
+### Main Menu
+
+The main menu displays:
+
+* Game title
+* Start instruction
+* Controls
+* Keyboard shortcuts
+
+### Playing
+
+The main gameplay state where the player moves, shoots, fights enemies, collects power-ups, and progresses through waves.
+
+### Paused
+
+The game can be paused using `ESC`.
+
+The pause screen displays a dark overlay, title, separator, and resume instruction.
+
+### Wave Complete
+
+After all enemies in a wave are defeated, the game displays:
+
+* Completed wave number
+* Countdown to the next wave
+
+### Game Over
+
+When the player's health reaches zero, the Game Over screen displays:
+
+* Final Score
+* High Score
+* Kill count
+* Restart instruction
+
+The game can be restarted using `R`.
+
+---
+
+## Player System
+
+The player supports:
+
+* WASD movement
+* Shooting
+* Health management
+* Temporary invincibility after taking damage
+* Shield protection
+* Rapid Fire
+* Health restoration through power-ups
+
+Player configuration is centralized in `config/settings.py`.
+
+---
+
+## Enemy System
+
+The game currently contains three enemy types.
+
+### Normal Enemy
+
+Balanced movement speed, health, damage, and score.
+
+```text
+Health: 30
+Damage: 10
+Score: 10
+Speed: 50
+```
+
+### Fast Enemy
+
+A faster enemy with lower health and zigzag movement.
+
+```text
+Health: 20
+Damage: 15
+Score: 20
+Speed: 100
+```
+
+### Tank Enemy
+
+A slower but stronger enemy with higher health and damage.
+
+```text
+Health: 50
+Damage: 25
+Score: 30
+Speed: 30
+```
+
+Tank enemies also apply knockback when attacking the player.
+
+Enemy configuration is centralized in `config/settings.py`.
+
+---
+
+## Wave System
+
+Gameplay is divided into waves.
+
+The initial wave contains 5 enemies.
+
+Each completed wave increases the number of enemies:
+
+```text
+Starting enemies: 5
+Enemies added per wave: 2
+```
+
+Enemy type probabilities change as the wave number increases, causing stronger enemy types to appear more frequently during later waves.
+
+After completing a wave, a short countdown is displayed before the next wave starts.
+
+---
+
+## Combat System
+
+### Shooting
+
+The player fires bullets using `SPACE`.
+
+Shooting uses a configurable cooldown.
+
+Bullet properties such as speed, scale, and damage are centralized in `config/settings.py`.
+
+### Collision
+
+The game handles collisions between:
+
+* Player and enemies
+* Bullets and enemies
+* Player and power-ups
+
+Bullets are removed when they leave the playable area or successfully damage an enemy.
+
+---
+
+## Power-Up System
+
+Enemies can drop power-ups when defeated.
+
+### Health Power-Up
+
+Restores a configurable amount of player health.
+
+### Shield Power-Up
+
+Temporarily protects the player from enemy damage.
+
+### Rapid Fire Power-Up
+
+Temporarily increases the player's firing speed.
+
+Power-up textures are preloaded to avoid a delay when a power-up appears for the first time.
+
+---
+
+## Effects System
+
+The game includes visual feedback systems such as:
+
+* Explosions
+* Particles
+* Damage numbers
+* Enemy health bars
+* Player health bar
+* Power-up status indicators
+
+---
+
+## Audio System
+
+Audio is managed through `SoundManager`.
+
+The system supports:
+
+* Background music
+* Sound effects
+* Separate music volume
+* Separate effects volume
+
+Background music stops when Game Over is reached and starts again when the game is restarted.
+
+---
+
+## Score and High Score
+
+The game tracks:
+
+```text
+Score
+Kills
+High Score
+```
+
+The High Score is stored locally in:
+
+```text
+data/high_score.txt
+```
+
+The file is created automatically when required.
+
+It is excluded from version control through `.gitignore`, allowing each local installation to maintain its own High Score.
+
+---
+
+## Controls
+
+| Key     | Action                  |
+| ------- | ----------------------- |
+| `W`     | Move Up                 |
+| `A`     | Move Left               |
+| `S`     | Move Down               |
+| `D`     | Move Right              |
+| `SPACE` | Shoot                   |
+| `ESC`   | Pause / Resume          |
+| `R`     | Restart after Game Over |
+
+---
+
+## Configuration
+
+Gameplay and UI values are centralized in:
+
+```text
+config/settings.py
+```
+
+Examples include:
+
+```text
+PLAYER_SPEED
+PLAYER_HEALTH
+ENEMY_SPEED
+ENEMY_HEALTH
+BULLET_SPEED
+BULLET_DAMAGE
+SHOOT_COOLDOWN
+WAVE_DELAY
+POWER_UP_DROP_CHANCE
+SHIELD_DURATION
+RAPID_FIRE_DURATION
+```
+
+Centralizing these values makes gameplay balancing and future changes easier without modifying the main game logic.
 
 ---
 
 ## Resource Management
 
-The project uses a centralized `resource_path()` function in `config/paths.py`.
+Resources are resolved through:
 
-This allows the game to correctly locate images and sound files in both situations:
+```text
+config/paths.py
+```
 
-1. Running directly from the Python source code
-2. Running as a packaged PyInstaller executable
+The project supports:
 
-This is especially important because PyInstaller stores bundled resources inside the executable distribution directory.
+1. Running directly from Python source
+2. Running as a PyInstaller build
+
+The resource-path system is used for images, sounds, and persistent game data.
 
 ---
 
-## Running From Source
+## Installation
 
 ### Requirements
 
 * Python 3.11.2
 * Arcade 3.3.3
 
-Install the required library:
+Install Arcade:
 
 ```bash
 pip install arcade==3.3.3
+```
+
+---
+
+## Running From Source
+
+Clone the repository:
+
+```bash
+git clone https://github.com/matinfate/arcade-first-game.git
+cd arcade-first-game
 ```
 
 Run the game:
@@ -289,9 +492,9 @@ python main.py
 
 ---
 
-## Building the Windows Executable
+## Windows Build
 
-The project uses [PyInstaller](https://pyinstaller.org/) to create a standalone Windows build.
+The project uses PyInstaller to create a standalone Windows build.
 
 Install PyInstaller:
 
@@ -299,83 +502,67 @@ Install PyInstaller:
 pip install pyinstaller
 ```
 
-Build the game using the included specification file:
+Build the project:
 
 ```bash
 pyinstaller --clean ArcadeGame.spec
 ```
 
-The packaged game will be generated inside:
+The generated build is located at:
 
 ```text
 dist/ArcadeGame/
 ```
 
-The main executable is:
+Executable:
 
 ```text
 dist/ArcadeGame/ArcadeGame.exe
 ```
 
-The packaged version includes the required game assets and does not require Python or Arcade to be installed on the target computer.
+The packaged version contains the required game assets and does not require Python or Arcade to be installed separately.
 
-The game is configured as a windowed application, so launching the executable does not open a separate command-line window.
-
----
-
-## Technologies
-
-* Python
-* Arcade
-* Object-Oriented Programming
-* PyInstaller
-* Git
-* GitHub
-* PyCharm
+The application is configured as a windowed executable and does not open a separate console window.
 
 ---
 
-## Project Goal
+## Development Principles
 
-The main goal of this project is to learn the fundamentals of game development while improving Python and OOP skills through a practical project.
+The project is developed incrementally with focus on:
 
-The project is developed incrementally, with a focus on:
-
-* Clean architecture
-* Reusable classes
 * Separation of responsibilities
+* Reusable classes
 * Centralized configuration
-* Game-state management
-* Collision systems
-* Enemy behavior
-* Resource management
-* Audio systems
-* Packaging and distribution
+* Predictable game-state transitions
+* Modular resource management
+* Reusable game systems
+* Maintainable gameplay logic
+* Standalone application packaging
 
 ---
 
-## Future Plans
+## Future Development
 
 Possible future improvements include:
 
-* 👾 More enemy types
-* 🔫 More weapons
-* ⚡ Additional power-ups
-* 👹 Boss enemies
-* 🎬 Improved animations
-* 🧠 More advanced enemy AI
-* 🗺️ Additional levels
-* 🎮 Additional game modes
-* ✨ More visual effects
-* 🔧 Further code refactoring and optimization
-* 🏅 Additional progression and scoring features
+* Additional enemy types
+* New weapons
+* Additional power-ups
+* Boss encounters
+* More advanced enemy AI
+* Additional levels
+* Additional game modes
+* Improved animations
+* Additional visual effects
+* Further refactoring and optimization
+* Additional progression systems
 
 ---
 
 ## Project Status
 
-**Version 1.0 — Complete**
+**Version 1.0**
 
-The first complete version of the game includes the core gameplay loop, multiple enemy types, waves, power-ups, visual effects, audio, pause and restart systems, persistent High Score, and Windows executable support.
+The project currently contains a complete playable gameplay loop with multiple enemy types, wave progression, power-ups, visual effects, audio, persistent High Score, game-state management, and Windows packaging.
 
-The project may continue to receive new gameplay features and improvements as development continues.
+Development may continue with additional gameplay and architectural improvements.
