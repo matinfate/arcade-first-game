@@ -445,17 +445,40 @@ class Game(arcade.Window):
 
     def draw_game_over(self):
 
+        # Dark overlay
+        arcade.draw_rect_filled(
+            arcade.rect.XYWH(
+                SCREEN_WIDTH / 2,
+                SCREEN_HEIGHT / 2,
+                SCREEN_WIDTH,
+                SCREEN_HEIGHT
+            ),
+            (0, 0, 0, 150)
+        )
+
+        # Title
         arcade.draw_text(
             "GAME OVER",
             SCREEN_WIDTH / 2,
-            350,
+            370,
             arcade.color.ORANGE_RED,
             40,
             anchor_x="center"
         )
 
+        # Separator
+        arcade.draw_line(
+            SCREEN_WIDTH / 2 - 150,
+            330,
+            SCREEN_WIDTH / 2 + 150,
+            330,
+            arcade.color.GRAY,
+            2
+        )
+
+        # Score
         arcade.draw_text(
-            f"SCORE       {self.score}",
+            f"SCORE    {self.score}",
             SCREEN_WIDTH / 2,
             285,
             arcade.color.WHITE,
@@ -463,8 +486,9 @@ class Game(arcade.Window):
             anchor_x="center"
         )
 
+        # High Score
         arcade.draw_text(
-            f"HIGH SCORE  {self.high_score}",
+            f"HIGH SCORE    {self.high_score}",
             SCREEN_WIDTH / 2,
             250,
             arcade.color.YELLOW,
@@ -472,8 +496,9 @@ class Game(arcade.Window):
             anchor_x="center"
         )
 
+        # Kills
         arcade.draw_text(
-            f"KILLS       {self.kills}",
+            f"KILLS    {self.kills}",
             SCREEN_WIDTH / 2,
             215,
             arcade.color.ORANGE,
@@ -481,10 +506,11 @@ class Game(arcade.Window):
             anchor_x="center"
         )
 
+        # Restart instruction
         arcade.draw_text(
             "Press R to Restart",
             SCREEN_WIDTH / 2,
-            160,
+            155,
             arcade.color.LIGHT_GRAY,
             16,
             anchor_x="center"
